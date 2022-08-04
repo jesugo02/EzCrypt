@@ -80,6 +80,8 @@ function validateForm(){
 
 $(function(){
 
+    var global_step = 0
+
     $(function(){
         $('#home').css('backgroundColor', '#12caab');
         step(0);
@@ -87,22 +89,26 @@ $(function(){
 
     var body  = $('body'),
 		stage = $('#stage'),
-		back  = $('#left-arrows');
+		back  = $('#left-arrows'),
+        next  = $('#right-arrows');
 
     $('#commencer').click(function(){
         step(1);
+        global_step = 1;
     });
 
     $('#home').click(function(){
         step(0);
+        global_step = 0;
     });
 
     $('#signup-span').click(function(){
         step(2);
+        global_step = 2;
     });
 
     $('#signup').click(function(){
-        alert("Hi The Goat");
+        // alert("Hi The Goat");
     });
 
     $('.side-navbar a').click(function(){
@@ -118,18 +124,21 @@ $(function(){
         body.attr('class', 'encrypt');
 
 		step(3);
+        global_step = 3;
     });
 
     $('#dechiffrer').click(function(){
         body.attr('class', 'decrypt');
 
 		step(3);
+        global_step = 3;
     });
 
     $('#aide').click(function(){
         body.attr('class', 'help');
 
 		step(3);
+        global_step = 3;
     });
 
 
@@ -137,6 +146,7 @@ $(function(){
         body.attr('class', 'open');
 
 		step(3);
+        global_step = 3;
     });
 
     $('#step3 .button').click(function(){
@@ -159,6 +169,7 @@ $(function(){
         file = e.target.files[0];
 
 		step(4);
+        global_step = 4;
 	});
 
 
@@ -171,6 +182,7 @@ $(function(){
 
 		file = e.target.files[0];
 		step(4);
+        global_step = 4;
 	});
 
 
@@ -210,6 +222,7 @@ $(function(){
 				a.attr('download', file.name + '.ezcrypt');
 
 				step(5);
+                global_step = 5;
 			};
 
 			// This will encode the contents of the file into a data-uri.
@@ -235,6 +248,7 @@ $(function(){
 				a.attr('download', file.name.replace('.ezcrypt',''));
 
 				step(5);
+                global_step = 5;
 			};
 
 			reader.readAsText(file);
@@ -252,6 +266,7 @@ $(function(){
 		});
 
 		step(0);
+        global_step = 0;
         $('#home').click();
 	});
 
@@ -263,7 +278,9 @@ $(function(){
 	// 	step(3);
     // });
 
-    
+    next.click(function(){
+        next_step();
+    });
 
 
     function step(i){
@@ -296,6 +313,11 @@ $(function(){
             }
         }
 	}
+
+    function next_step(){
+        step(global_step+1);
+        global_step=global_step+1;
+    }
 
 });
 // END OF MY FUNCITONS
