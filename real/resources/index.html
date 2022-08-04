@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>EzCrypt</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <nav id = "top-navbar">
+      <a href="#" class="icon-navbar" id="shut"><span>&#x2771;</span></a>
+      <a href="#" class="icon-navbar" id="enlarge"><span>&#x2770;</span></a>
+      <!-- <a href="#" class="icon-navbar" id="minus"><span>&minus;</span></a> -->
+      <a href="#" class="icon-navbar" id="bar"><span>|</span></a>
+      <div class="dropdown">
+        <a href="#"><span class="icon-navbar" id = "dark-mode">&#x272C;</span></a>
+        <div class="dark-mode-content" id = "dark-mode-content">
+          <a href="#" id="blank_a"></a>
+          <a href="#" onclick="darkMode()">Sombre</a>
+          <a href="#" onclick="lightMode()">Clair</a>
+        </div>
+      </div>
+      <a class="icon-navbar" id="side-icon"><span>&#9776; Menu</span></a>
+
+      <!-- <a href="#"><span id= "app-title">EzCrypt</span></a> -->
+    </nav>
+
+    <!-- Side NavBar  -->
+    <div id = "mySidenav" class="side-navbar">
+      <a class="side-a" href="#" id = "home">Home</a>
+      <a class="side-a" href="#" id = "chiffrer">Chiffrer</a>
+      <a class="side-a" href="#" id = "dechiffrer">Déchiffrer</a>
+      <a class="side-a" href="#" id = "aide">Aide</a>
+      <a class="side-a" href="#" id = "ouvrir">Ouvrir</a>
+      <a class="side-a" href="#" id = "dashboard">Dashboard</a>
+      
+    </div>
+
+    <div class="nav-arrows">
+      <div id="left-arrows">
+        <a href="#"></a>
+      </div>
+  
+      <div id="right-arrows">
+        <a href="#"></a>
+      </div>
+    </div>
+    
+  
+
+
+    <div id="stage">
+      
+      <!-- Step0 Home page -->
+      <div id="step0" class="center">
+          <div class="center-child">
+            <h1 class="h1-home">
+              Choisissez EzCrypt, 
+            </h1>
+            <h1>
+              Sécurisez vos données personnelles. 
+            </h1>
+            <h3>Protégez votre vie privée.</h3>
+
+            <a class = "button-home" id="en_savoir_plus">En savoir plus</a>
+            <a class = "button-home" id="commencer">Commencer</a>
+          </div>
+            
+      </div>
+
+      <!-- Step1 Login page  -->
+      <div id="step1" class="center">
+        <div class="center-child">
+          
+          <!-- <img class = "login-image" src="./bg-crypto.png" alt="login-background-img"> -->
+          <div class="border-color">
+            <div class="login-content">
+              <div id = "login-title" class = "login-part">
+                  <h1 id = "login-title">Login </h1>
+              </div>
+              <div class = "login-part">
+                  <label class = "login-label" for="email">Email</label><br>
+                  <input class = "login-input" type="text" id="email"><br>
+              </div>
+  
+              <div class = "login-part">
+                  <label class = "login-label" for="password">Mot de passe</label><br>
+                  <input class = "login-input" type="password" id="password"><br>
+              </div>
+              
+              <div class = "login-part" id = "login-part">
+                  <button class="login-button" >Se connecter</button>
+              </div>
+              
+              <div class = "login-bottom">
+                  <p>Vous n'avez pas un compte? <span class = "login-span" id = "signup-span">créer un compte</span></p>
+              </div>  
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+
+      <!-- Step2 SignUp page -->
+      <div id="step2" class="center">
+        <div class="center-child">
+          <div class="alert warning">
+            <strong>N'oubliez pas !</strong> de consulter votre mail ou vos spam pour valider votre inscription.
+          </div>
+          <div id = "signup-modal" class = "modal">
+            <!-- <span class = "close" onclick="document.getElementById('signup-modal').style.display = 'none'">&times;</span> -->
+            <form name = "signup" class="modal-content">
+                <div class="modal-content-container">
+                    <h1 class="form-title">Sign Up</h1>
+                    <p>Remplissez le formulaire</p>
+                    <hr>
+    
+                    <label for="email"><b>Email</b></label>
+                    <input class = "signup-input" type="text"  name="email" required>
+    
+                    <label for="psw"><b>Password</b></label>
+                    <input class = "signup-input" type="password" name="psw" required>
+    
+                    <label for="psw-repeat"><b>Repeat Password</b></label>
+                    <input class = "signup-input" type="password" placeholder="Repeat Password" name="psw-repeat" required>
+                    
+                    <input type="submit" class = "signup-button" id = "signup" value="S'inscrire" onclick="validateForm()">
+                </div>
+            </form>
+        </div>
+        </div>
+      </div>
+
+      <!-- Step3 File or Type of Help Selector -->
+      <div id="step3" class="center">
+        <div class="center-child">
+          <div class="content if-encrypt" id ="choosing-encrypt-file">
+            <h1>Choisissez le fichier à Chiffrer</h1>
+            <a class="button browse blue">Choisir</a>
+
+            <input type="file" id="encrypt-input">
+          </div>
+
+          <div class="content if-decrypt">
+            <h1>Choisissez le fichier à déchiffrer</h1>
+            <a class="button browse blue">Choisir</a>
+
+            <input type="file" id="decrypt-input">
+          </div>
+
+          <div class="content if-open">
+            <h1>Choisissez le fichier à ouvrir</h1>
+            <a class="button browse blue"></a>
+
+            <input type="file" id="send-input">
+            <input type="email"id="send-email-input">
+          </div>
+
+          <div class="content if-help">
+            <a class="button help-modal">Guide d'utlisation</a>
+            <a class="button help-modal">Session FAQ</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step4 Keys Picker -->
+      <div id="step4" class="center">
+        <div class="center-child">
+          <div class="content if-encrypt">
+            <h1>Entrez une clé de chiffrement</h1>
+            <h3>Cette phrase vous sera demander lors du déchiffrement (!Important)</h3>
+
+            <input type="password">
+            <a class="button process red">Ok-Chiffrer</a>
+          </div>
+
+          <div class="content if-decrypt">
+            <h1>Entrez la clé de déchiffrement</h1>
+            <h3>Il s'agit de la clé utilisée lors du chiffrement</h3>
+
+            <input type="password">
+            <a class="button process red">Ok-Déchiffrer</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step5 End of Operation -->
+      <div id="step5" class="center">
+        <div class="center-child">
+          <div class="content">
+            <h1>L'operation a pris fin</h1>
+            <a class="button download green">Enregistrer</a>
+          </div>
+        </div>
+      </div>
+    </div>    
+
+    <script>
+
+      let  idr = 1 
+      function openSidebar(){
+
+        if(idr == 1){
+          document.getElementById("mySidenav").style.width = "131px";
+          // document.getElementById("stage").style.marginLeft = "131px";
+          document.getElementById("step1").style.marginLeft = "131px";
+          idr=2;
+        }
+        else{
+          document.getElementById("mySidenav").style.width = "0";
+          // document.getElementById("stage").style.marginLeft = "0";
+          document.getElementById("step1").style.marginLeft = "0";
+          idr=1;
+        }      
+      }
+    </script>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="js/neutralino.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
