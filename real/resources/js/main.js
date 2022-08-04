@@ -76,14 +76,18 @@ function validateForm(){
 
 }
 
-$(function(){
-    $('#home').css('backgroundColor', '#12caab');
-});
+
 
 $(function(){
+
+    $(function(){
+        $('#home').css('backgroundColor', '#12caab');
+        step(0);
+    });
+
     var body  = $('body'),
 		stage = $('#stage'),
-		back  = $('#back');
+		back  = $('#left-arrows');
 
     $('#commencer').click(function(){
         step(1);
@@ -173,7 +177,7 @@ $(function(){
 	$('a.button.process').click(function(){
 
 		var input = $(this).parent().find('input[type=password]'),
-			a = $('#step4 a.download'),
+			a = $('#step5 a.download'),
 			password = input.val();
 
 		input.val('');
@@ -182,8 +186,74 @@ $(function(){
 			alert('Please choose a longer password!');
 			return;
 		}
-        
-    });
+
+        var reader = new FileReader();
+
+		if(body.hasClass('encrypt')){
+
+			// Encrypt the file!
+            alert("ya Body has class encrypt");
+
+			reader.onload = function(e){
+                alert("ya reader onload");
+
+				// Use the CryptoJS library and the AES cypher to encrypt the 
+				// contents of the file, held in e.target.result, with the password
+
+				var encrypted = CryptoJS.AES.encrypt(e.target.result, password);
+
+				// The download attribute will cause the contents of the href
+				// attribute to be downloaded when clicked. The download attribute
+				// also holds the name of the file that is offered for download.
+
+				a.attr('href', 'data:application/octet-stream,' + encrypted);
+				a.attr('download', file.name + '.ezcrypt');
+
+				step(5);
+			};
+
+			// This will encode the contents of the file into a data-uri.
+			// It will trigger the onload handler above, with the result
+
+			reader.readAsDataURL(file);
+		}
+		else {
+
+			// Decrypt it!
+
+			reader.onload = function(e){
+
+				var decrypted = CryptoJS.AES.decrypt(e.target.result, password)
+										.toString(CryptoJS.enc.Latin1);
+
+				if(!/^data:/.test(decrypted)){
+					alert("Invalid pass phrase or file! Please try again.");
+					return false;
+				}
+
+				a.attr('href', decrypted);
+				a.attr('download', file.name.replace('.ezcrypt',''));
+
+				step(5);
+			};
+
+			reader.readAsText(file);
+		}
+	});
+
+    back.click(function(){
+
+		// Reinitialize the hidden file inputs,
+		// so that they don't hold the selection 
+		// from last time
+
+		$('#step3 input[type=file]').replaceWith(function(){
+			return $(this).clone();
+		});
+
+		step(0);
+        $('#home').click();
+	});
 
 
 
@@ -200,13 +270,13 @@ $(function(){
 
 		if(i === 0){
 			
-            // back.fadeOut();
+            back.fadeOut();
             stage.css('top', 0+'%');
             
 		}
 		else{
 
-            // back.fadeIn();
+            back.fadeIn();
 
             if(i==1){
                 stage.css('top',(-100 + '%'));
@@ -221,7 +291,9 @@ $(function(){
             else if(i==4){
                 stage.css('top', (-400 + '%'));
             }
-         
+            else if(i==5){
+                stage.css('top', (-500 + '%'));
+            }
         }
 	}
 

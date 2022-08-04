@@ -83,11 +83,11 @@ a {
     margin-left: 300px;   
 }
 
-#shut:hover{
+#right-arrows:hover{
     background-color: red;
 }
 
-#enlarge:hover{
+#left-arrows:hover{
     background-color: rgb(3, 85, 80);
 }
 
@@ -507,3 +507,10 @@ hr{
     margin-bottom: 90px;
 }
 
+
+#step5{
+    top: 240px;
+    padding: 60px;
+    margin-top: 90px;
+    margin-bottom: 90px;
+}
