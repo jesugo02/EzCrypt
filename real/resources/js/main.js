@@ -54,29 +54,93 @@ function onWindowClose() {
 
 // My Functions Go Here
 
+// let  emailUser = document.forms["signup"]["email"].value;
+// let  psw1 = document.forms["signup"]["psw"].value;
+// let  psw2 = document.forms["signup"]["psw-repeat"].value;
+
+var body  = $('body'),
+	stage = $('#stage'),
+	back  = $('#left-arrows'),
+    next  = $('#right-arrows');
+
+var fileCmp = 0;            
+
+let User;
+let FileListe = [];
+
+function step(i){
+
+    if(i === 0){
+        
+        back.fadeOut();
+        stage.css('top', 0+'%');
+        
+    }
+    else{
+
+        back.fadeIn();
+
+        if(i==1){
+            stage.css('top',(-100 + '%'));
+        }
+        else if(i==2){
+            stage.css('top', (-200 + '%'));
+        }
+        else if(i==3){
+            stage.css('top', (-300 + '%'));
+        }
+        
+        else if(i==4){
+            stage.css('top', (-400 + '%'));
+        }
+        else if(i==5){
+            stage.css('top', (-500 + '%'));
+        }
+    }
+}
+
+function next_step(){
+    step(global_step+1);
+    global_step=global_step+1;
+}
+
 
 
 
 function validateForm(){
 
     // alert("You kidding me!!");
-    let  name = document.forms["signup"]["email"].value;
-    let  psw1 = document.forms["signup"]["pwd"].value;
-    let  psw2 = document.forms["signup"]["pwd-repeat"].value;
+    let  emailUser = document.forms["signup"]["email"].value;
+    let  psw1 = document.forms["signup"]["psw"].value;
+    let  psw2 = document.forms["signup"]["psw-repeat"].value;
 
-    alert(name);
-    alert(psw1);
-    alert(psw2);
-    if (name != "" && psw1 != "" && psw2 != "") {
-        alert(name);
-        step(1);
-        return true;     
+    if (emailUser != "" && psw1 != "" && psw2 != "") {
+        if(psw1 === psw2){
+            if(psw1.length >= 5 && psw2.length >= 5){
+                User = new Utilisateur(1, emailUser, psw1);
+                console.log(User);
+                step(1);
+                return true;
+            }
+            else{
+                console.log('il faut un mot de passe plus long');
+            }
+            
+        }
+        else{
+            console.log('psw1 != psw2');
+        }
     }
-    return false;
+    else{
+        console.log('un champ est invalide');
+        return false;
+    }
 
 }
 
 
+
+// alert(emailUser);
 
 $(function(){
 
@@ -148,6 +212,14 @@ $(function(){
 		step(3);
         global_step = 3;
     });
+    
+    $('#dashboard').click(function(){
+        body.attr('class', 'dashboard');
+
+		step(3);
+        global_step = 3;
+    });
+
 
     $('#step3 .button').click(function(){
 		
@@ -167,6 +239,27 @@ $(function(){
 		}
 
         file = e.target.files[0];
+
+        if ('name' in file) {
+            console.log(file.name);
+        }
+        else {
+            console.log(file.fileName);
+        }
+        if ('size' in file) {
+            console.log(file.size);
+        }
+        else {
+            console.log(file.fileSize);
+        }
+        console.log(file.mozFullPath);
+
+
+
+        // console.log(file.name);
+        // console.log(file.);
+        // fileCmp = fileCmp + 1;
+        // FileListe.concat(new Fichier(fileCmp, ));
 
 		step(4);
         global_step = 4;
@@ -281,43 +374,6 @@ $(function(){
     next.click(function(){
         next_step();
     });
-
-
-    function step(i){
-
-		if(i === 0){
-			
-            back.fadeOut();
-            stage.css('top', 0+'%');
-            
-		}
-		else{
-
-            back.fadeIn();
-
-            if(i==1){
-                stage.css('top',(-100 + '%'));
-            }
-            else if(i==2){
-                stage.css('top', (-200 + '%'));
-            }
-            else if(i==3){
-                stage.css('top', (-300 + '%'));
-            }
-            
-            else if(i==4){
-                stage.css('top', (-400 + '%'));
-            }
-            else if(i==5){
-                stage.css('top', (-500 + '%'));
-            }
-        }
-	}
-
-    function next_step(){
-        step(global_step+1);
-        global_step=global_step+1;
-    }
 
 });
 // END OF MY FUNCITONS

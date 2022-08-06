@@ -75,7 +75,7 @@
           <div class="border-color">
             <div class="login-content">
               <div id = "login-title" class = "login-part">
-                  <h1 id = "login-title">Login </h1>
+                  <h1 id = "login-title">Login</h1>
               </div>
               <div class = "login-part">
                   <label class = "login-label" for="email">Email</label><br>
@@ -88,7 +88,7 @@
               </div>
               
               <div class = "login-part" id = "login-part">
-                  <button class="login-button" >Se connecter</button>
+                  <button class="login-button" id="seconnecter">Se connecter</button>
               </div>
               
               <div class = "login-bottom">
@@ -124,7 +124,7 @@
                     <label for="psw-repeat"><b>Repeat Password</b></label>
                     <input class = "signup-input" type="password" placeholder="Repeat Password" name="psw-repeat" required>
                     
-                    <input type="submit" class = "signup-button" id = "signup" value="S'inscrire" onclick="validateForm()">
+                    <input type = "button" class = "signup-button" id = "signup" value="S'inscrire" onclick="validateForm()">
                 </div>
             </form>
         </div>
@@ -135,30 +135,61 @@
       <div id="step3" class="center">
         <div class="center-child">
           <div class="content if-encrypt" id ="choosing-encrypt-file">
+            
             <h1>Choisissez le fichier à Chiffrer</h1>
-            <a class="button browse blue">Choisir</a>
+            <div class="back-color">
+              <div class="alert warning" id="alert-encrypt">
+                <strong>Plus le fichier est lourd plus le temps de chiffrement est long</strong>
+              </div>
+           
+              <div class="sub-back-color">
+                <a class="button browse">Choisir</a>
+                <input type="file" id="encrypt-input">
+              </div>
 
-            <input type="file" id="encrypt-input">
+              
+            </div>
+            
           </div>
 
           <div class="content if-decrypt">
+           
             <h1>Choisissez le fichier à déchiffrer</h1>
-            <a class="button browse blue">Choisir</a>
+            <div class="back-color">
+              <div class="alert warning" id="alert-decrypt">
+                <strong>Plus le fichier est lourd plus le temps de déchiffrement est long</strong>            
+              </div>
 
-            <input type="file" id="decrypt-input">
+              <div class="sub-back-color">
+                <a class="button browse">Choisir</a>
+
+                <input type="file" id="decrypt-input">
+              </div>
+            </div>
+            
+            
           </div>
 
           <div class="content if-open">
-            <h1>Choisissez le fichier à ouvrir</h1>
-            <a class="button browse blue"></a>
 
+            <h1>Choisissez le fichier à ouvrir</h1>
+            <div class="flex">
+              <a class="button browse" id="repere">Choisir</a>
+              <input class="input-path" type="text" id="send-path" placeholder="Enter the full path of the file">
+              <a class="button browse red">Ouvrir</a>
+
+            </div>
+            
             <input type="file" id="send-input">
-            <input type="email"id="send-email-input">
           </div>
 
           <div class="content if-help">
-            <a class="button help-modal">Guide d'utlisation</a>
-            <a class="button help-modal">Session FAQ</a>
+            <a class="browse button help-modal">Guide d'utlisation</a>
+            <a class="browse button help-modal">Session FAQ</a>
+          </div>
+
+          <div class="content if-dashboard">
+            
           </div>
         </div>
       </div>
@@ -168,18 +199,26 @@
         <div class="center-child">
           <div class="content if-encrypt">
             <h1>Entrez une clé de chiffrement</h1>
-            <h3>Cette phrase vous sera demander lors du déchiffrement (!Important)</h3>
-
-            <input type="password">
-            <a class="button process red">Ok-Chiffrer</a>
+            <div class="alert danger" id="alert-encryption">
+              <strong>Cette phrase vous sera demander lors du déchiffrement</strong>
+            </div>
+            <div class="a-input">
+              <input class = "input-keys" type="password">
+              <a class="button process ">Ok-Chiffrer</a>
+            </div>
+            
           </div>
 
           <div class="content if-decrypt">
             <h1>Entrez la clé de déchiffrement</h1>
-            <h3>Il s'agit de la clé utilisée lors du chiffrement</h3>
-
-            <input type="password">
-            <a class="button process red">Ok-Déchiffrer</a>
+            <div class="alert sucess" id="alert-decryption">
+              <strong>Il s'agit de la clé utilisée lors du chiffrement.</strong>
+            </div>
+            <div class="a-input">
+              <input class = "input-keys" type="password">
+              <a class="button process ">Ok-Déchiffrer</a>
+            </div>
+            
           </div>
         </div>
       </div>
@@ -193,9 +232,35 @@
           </div>
         </div>
       </div>
+
     </div>    
 
     <script>
+
+
+      function dataStore(){
+
+        const customerData = [
+            { ssn: "444-44-4444", name: "Bill", age: 35, email: "bill@company.com" },
+            { ssn: "555-55-5555", name: "Donna", age: 32, email: "donna@home.org" }
+        ];
+
+        var id = 1;
+
+        for (var i in customerData) {
+
+            Neutralino.storage.setData(id, customerData[i]);
+            id = id + 1;
+
+        }
+
+        for (var i in customerData){
+            let data = Neutralino.storage.getData(id);
+            console.log(data);
+        }
+
+
+      }
 
       let  idr = 1 
       function openSidebar(){
@@ -215,8 +280,9 @@
       }
     </script>
     
-    <script src="js/aes.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="./classes.js"></script>
+    <script src="./aes.js"></script>
+    <script src="./js/jquery.min.js"></script>
     <script src="js/neutralino.js"></script>
     <script src="js/main.js"></script>
   </body>
