@@ -20,20 +20,20 @@
           <a href="#" onclick="lightMode()">Clair</a>
         </div>
       </div>
-      <a class="icon-navbar" id="side-icon"><span>&#9776; Menu</span></a>
+      <a class="icon-navbar" id="side-icon"><span><img src="./icons/sidebar/bars-solid.svg" alt="" style="width: 20px; height:17px;"></span>  Menu</a>
 
       <!-- <a href="#"><span id= "app-title">EzCrypt</span></a> -->
     </nav>
 
     <!-- Side NavBar  -->
     <div id = "mySidenav" class="side-navbar">
-      <a class="side-a" href="#" id = "home">Home</a>
-      <a class="side-a" href="#" id = "chiffrer">Chiffrer</a>
-      <a class="side-a" href="#" id = "dechiffrer">Déchiffrer</a>
-      <a class="side-a" href="#" id = "aide">Aide</a>
-      <a class="side-a" href="#" id = "ouvrir">Ouvrir</a>
-      <a class="side-a" href="#" id = "dashboard">Dashboard</a>
-      
+      <a class="side-a" href="#" id = "home"><span><img src="./icons/sidebar/house-chimney-solid.svg" alt="" style="width: 20px; height:17px;"></span> Home</a>
+      <a class="side-a" href="#" id = "chiffrer"><span><img src="./icons/sidebar/lock-solid.svg" alt="" style="width: 20px; height:17px;"></span> Chiffrer</a>
+      <a class="side-a" href="#" id = "dechiffrer"><span><img src="./icons/sidebar/lock-open-solid.svg" alt="" style="width: 20px; height:17px;"></span> Déchiffrer</a>
+      <a class="side-a" href="#" id = "aide"><span><img src="./icons/sidebar/circle-question-solid.svg" alt="" style="width: 20px; height:17px;"></span> Aide</a>
+      <a class="side-a" href="#" id = "ouvrir"><span><img src="./icons/sidebar/folder-open-solid.svg" alt="" style="width: 20px; height:17px;"></span> Ouvrir</a>
+      <a class="side-a" href="#" id = "dashboard"><span><img src="./icons/sidebar/chart-line-solid.svg" alt="" style="width: 20px; height:17px;"></span> Dashboard</a>
+      <a class="side-a" href="#" id = "parametre"><span><img src="./icons/sidebar/gear-solid.svg" alt="" style="width: 20px; height:17px;"></span> Paramètre</a>
     </div>
 
     <div class="nav-arrows">
@@ -63,21 +63,20 @@
               </h1>
               <h3>Protégez votre vie privée.</h3>
   
-              <a class = "button-home" id="en_savoir_plus">En savoir plus</a>
-              <a class = "button-home" id="commencer">Commencer</a>
+              <a class = "button-home" id="en_savoir_plus"><img src="./icons/sidebar/circle-info-solid.svg" alt="" style="width: 20px; height:17px;"> En savoir plus</a>
+              <a class = "button-home" id="commencer">Commencer <img src="./icons/sidebar/right-to-bracket-solid.svg" alt="" style="width: 20px; height:17px;"></a>
             </div>
-          </div>
-            
+          </div>           
       </div>
 
       <!-- Step1 Login page  -->
       <div id="step1" class="center">
         <div class="center-child">
           
-          <div class="border-color">
+          <div class=   "border-color">
             <div class="login-content">
               <div id = "login-title" class = "login-part">
-                  <h1 id = "login-title">Login</h1>
+                  <h1 id = "login-title">Login <img src="./icons/sidebar/user-solid.svg" alt="" style="width: 28px; height:25px;"></h1>
               </div>
               <div class = "login-part">
                   <label class = "login-label" for="email">Email</label><br>
@@ -236,6 +235,9 @@
         </div>
       </div>
 
+      <!-- SnackBar -->
+      <div id="snackbar"></div>
+
     </div>    
 
     <script>
@@ -265,22 +267,8 @@
 
       }
 
-      let  idr = 1 
-      function openSidebar(){
-
-        if(idr == 1){
-          document.getElementById("mySidenav").style.width = "131px";
-          // document.getElementById("stage").style.marginLeft = "131px";
-          document.getElementById("step1").style.marginLeft = "131px";
-          idr=2;
-        }
-        else{
-          document.getElementById("mySidenav").style.width = "0";
-          // document.getElementById("stage").style.marginLeft = "0";
-          document.getElementById("step1").style.marginLeft = "0";
-          idr=1;
-        }      
-      }
+      
+      
     </script>
     
     <script src="./classes.js"></script>

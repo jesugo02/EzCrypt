@@ -118,21 +118,21 @@ function validateForm(){
         if(psw1 === psw2){
             if(psw1.length >= 5 && psw2.length >= 5){
                 User = new Utilisateur(1, emailUser, psw1);
-                console.log(User);
                 step(1);
-                return true;
+                showSnackbar("Inscription effectuée avec succès");
             }
             else{
-                console.log('il faut un mot de passe plus long');
+                showSnackbar('Utilisez un mot de passe plus long');
             }
             
         }
         else{
-            console.log('psw1 != psw2');
+            showSnackbar('Entrez le même mot de passe');
         }
     }
     else{
-        console.log('un champ est invalide');
+        
+        showSnackbar('un champ est invalide');
         return false;
     }
 
@@ -219,6 +219,7 @@ $(function(){
 		step(3);
         global_step = 3;
     });
+
 
 
     $('#step3 .button').click(function(){
@@ -361,6 +362,7 @@ $(function(){
 		step(0);
         global_step = 0;
         $('#home').click();
+
 	});
 
 
@@ -376,6 +378,25 @@ $(function(){
     });
 
 });
+
+function  showSnackbar(message) {
+
+    alert("Entered function");
+    
+    var x = document.getElementById("snackbar");
+    
+    x.innerHTML = message;
+
+    x.className = "show";
+  
+    setTimeout(function(){
+        x.className = x.className.replace("show", ""); 
+    }, 5000);
+
+} 
+
+
+
 // END OF MY FUNCITONS
 
 Neutralino.init();

@@ -196,7 +196,7 @@ a {
 
 
 .side-navbar a{
-    padding: 8px 8px 8px 12px;
+    padding: 18px 18px 18px 22px;
     font-size: 17px;
     margin-right: 0;
     color: black;
@@ -237,9 +237,13 @@ a {
 	position:relative;
 
 }
+#parametre{
+    margin-bottom: 80px !important;
+}
 
 #step0{
-    background-color: white;
+    background-color: #c2fdfc;
+    top: 35px;
 }
 #step1{
     background-color: white;
@@ -362,23 +366,21 @@ a {
 
 body.encrypt .if-encrypt{
 	display:block;
-    height: 100%;
+    /* height: 100%; */
+    background-color: #c2fdfc;
 }
 
 
 
 body.decrypt .if-decrypt{
 	display:block;
+    background-color: #c2fdfc;
 } 
 
 
 body.open .if-open{
 	display:block;
     background-color: #c2fdfc;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    padding-left: 10px;
-    padding-right: 110px;
 }
 
 
@@ -764,4 +766,45 @@ color: red !important;
 
 .repere{
    margin: -1;
+}
+
+#snackbar{
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 10s;
+    animation: fadein 0.5s, fadeout 0.5s 10s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+}
+  
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+  
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+  
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
 }
