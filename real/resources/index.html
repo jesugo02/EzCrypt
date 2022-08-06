@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>EzCrypt</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- <link rel="stylesheet" href="./bootstrap/bootstrap-5.0.2-dist/css/bootstrap.min.css"> -->
   </head>
   <body>
     <nav id = "top-navbar">
@@ -53,16 +54,18 @@
       <!-- Step0 Home page -->
       <div id="step0" class="center">
           <div class="center-child">
-            <h1 class="h1-home">
-              Choisissez EzCrypt, 
-            </h1>
-            <h1>
-              Sécurisez vos données personnelles. 
-            </h1>
-            <h3>Protégez votre vie privée.</h3>
-
-            <a class = "button-home" id="en_savoir_plus">En savoir plus</a>
-            <a class = "button-home" id="commencer">Commencer</a>
+            <div class="cover">
+              <h1 class="h1-home">
+                Choisissez EzCrypt, 
+              </h1>
+              <h1>
+                Sécurisez vos données personnelles. 
+              </h1>
+              <h3>Protégez votre vie privée.</h3>
+  
+              <a class = "button-home" id="en_savoir_plus">En savoir plus</a>
+              <a class = "button-home" id="commencer">Commencer</a>
+            </div>
           </div>
             
       </div>
@@ -71,7 +74,6 @@
       <div id="step1" class="center">
         <div class="center-child">
           
-          <!-- <img class = "login-image" src="./bg-crypto.png" alt="login-background-img"> -->
           <div class="border-color">
             <div class="login-content">
               <div id = "login-title" class = "login-part">
@@ -183,7 +185,8 @@
             <input type="file" id="send-input">
           </div>
 
-          <div class="content if-help">
+          <div class="content if-help" id = "help-box">
+            <img src="./Problem solving-pana.svg" alt="">
             <a class="browse button help-modal">Guide d'utlisation</a>
             <a class="browse button help-modal">Session FAQ</a>
           </div>

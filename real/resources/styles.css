@@ -24,7 +24,7 @@ html{
 
 .center{
     position: relative;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     background-color: #b12c2c;
@@ -323,6 +323,36 @@ a {
 #a-input{
     vertical-align: middle;
 }
+.cover{
+    width: 65%;
+}
+
+/* #step0{
+    background-image: url("./Social\ media-rafiki.svg");
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-size: 300px 500px;
+    
+} */
+
+
+#step0{
+    background-image: url("./blog-post-animate.svg");
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-size: 400px 518px;
+    padding-left: 15px;
+    
+}
+
+#step1{
+    background-image: url("./fingerprint-animate.svg");
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: 400px 400px;
+    margin-right: 50px;
+}
+
 
 
 [class*="if-"]{
@@ -344,12 +374,30 @@ body.decrypt .if-decrypt{
 
 body.open .if-open{
 	display:block;
+    background-color: #c2fdfc;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 10px;
+    padding-right: 110px;
 }
 
 
 body.help .if-help{
 	display:block;
+    background-color: #c2fdfc;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 110px;
+    padding-right: 110px;
 }
+/* 
+body.help {
+    background-image: url("./Problem\ solving-pana.svg");
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-size: auto;
+    padding-left: 15px;
+} */
 
 body.dashboard .if-dashboard{
     display: block;
@@ -692,7 +740,7 @@ hr{
 
 .input-path{
     box-shadow: 0 0 4px #D8E1E8;
-    width: 480px;
+    width: 100%;
     font-size: 1.3rem;
     margin: -2;
     display: inline;
