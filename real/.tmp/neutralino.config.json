@@ -46,15 +46,7 @@
       "maximize": false,
       "hidden": false,
       "resizable": true,
-      "exitProcessOnClose": true,
-      "nativeAllowList": [
-        "app.*",
-        "os.*",
-        "debug.log",
-        "filesystem.*",
-        "storage.*",
-        "window.*"
-      ]
+      "exitProcessOnClose": true
     },
     "browser": {
       "globalVariables": {

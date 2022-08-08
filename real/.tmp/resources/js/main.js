@@ -63,11 +63,6 @@ function onWindowClose() {
 
 localStorage.setItem("lastname", "Smith");
 console.log(localStorage.getItem("lastname"));
-// alert(NL_CWD);
-Neutralino.filesystem.writeFile('./myFile.txt', 'Sample content');
-
-Neutralino.os.execCommand('xdg-open ./myFile.txt', {background : true});
-
 
 var body  = $('body'),
 	stage = $('#stage'),
