@@ -14,9 +14,8 @@ class Fichier{
 
 class Utilisateur{
 
-    constructor(IdUser, email, password){
+    constructor(email, password){
 
-        this.IdUser     = IdUser;
         this.email     = email;
         this.password   = password;
 

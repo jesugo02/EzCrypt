@@ -166,7 +166,7 @@ a {
     font-weight: bold;
     color: #05cac6;
     background-color: #f1f1f1;
-    
+
 }
 
 #blank_a:hover{
@@ -189,9 +189,10 @@ a {
     
     top: 21px;
     background-color: #edece8;
-    overflow-x: hidden;
+    overflow: hidden;
     transition: 0.5s;
     padding-top: 60px;
+    padding-bottom: 15px;
 }
 
 
@@ -206,6 +207,7 @@ a {
     /* letter-spacing: 2px; */
 }
 
+
 .side-navbar a:hover{
     color: white;
     background-color: #787b7b !important;
@@ -213,6 +215,22 @@ a {
     transition: 0.4s;
 }
 
+#loged-in{
+    padding: 18px 18px 18px 22px;
+}
+#loged-in:hover{
+    background-color: #edece8 !important;
+    color: black;
+    cursor: pointer;
+}
+
+.dot{
+    height: 20px;
+    width: 20px;
+    background-color: rgb(41, 219, 29);
+    border-radius: 50%;
+    display: inline-block;
+}
 
 /* Step0 */
 
@@ -230,6 +248,8 @@ a {
     padding: 50px;
 	transition:top 0.4s;
 }
+
+
 
 #stage > div{
 

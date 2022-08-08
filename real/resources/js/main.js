@@ -61,12 +61,13 @@ function onWindowClose() {
 // let  psw2 = document.forms["signup"]["psw-repeat"].value;
 
 
-localStorage.setItem("lastname", "Smith");
-console.log(localStorage.getItem("lastname"));
+// localStorage.setItem("lastname", "Smith");
+// console.log(localStorage.getItem("lastname"));
 // alert(NL_CWD);
-Neutralino.filesystem.writeFile('./myFile.txt', 'Sample content');
+// Neutralino.filesystem.writeFile('./myFile.txt', 'Sample content');
 
-Neutralino.os.execCommand('xdg-open ./myFile.txt', {background : true});
+// Neutralino.os.execCommand('xdg-open ./myFile.txt', {background : true});
+
 
 
 var body  = $('body'),
@@ -85,13 +86,16 @@ function step(i){
     if(i === 0){
         
         back.fadeOut();
+        $('#login-sidebar').fadeIn(2000);
+        $('#signup-sidebar').fadeIn(2000);
         stage.css('top', 0+'%');
         
     }
     else{
 
         back.fadeIn();
-
+        $('#login-sidebar').fadeOut(1000);
+        $('#signup-sidebar').fadeOut(1000);
         if(i==1){
             stage.css('top',(-100 + '%'));
         }
@@ -126,13 +130,11 @@ function validateForm(){
     if (emailUser != "" && psw1 != "" && psw2 != "") {
         if(psw1 === psw2){
             if(psw1.length >= 5 && psw2.length >= 5){
-                console.log("yaya");
-                User = new Utilisateur(1, emailUser, psw1);
-                console.log("yaya");
-                UserListe = UserListe.concat(User.IdUser);
-                // console.log(UserListe.length);
-                showSnackbar("Inscription effectuée avec succès");
+                User = new Utilisateur(emailUser, psw1);
+                localStorage.setItem(User.email, User.password);  
+                showSnackbar("Inscription effectuée avec succès");                
                 step(1);
+    
             }
             else{
                 showSnackbar('Utilisez un mot de passe plus long');
@@ -145,12 +147,10 @@ function validateForm(){
     }
     else{
 
-        showSnackbar('un champ est invalide');
+        showSnackbar('Un champ est invalide');
         return false; 
 
     }
-    
-
 
 }
 
@@ -227,7 +227,11 @@ $(function(){
         global_step = 3;
     });
 
-
+    $('#loged-in').click(function(){
+        this.fadeOut();
+        step(0);
+        showSnackbar("Vous êtes déconnectés");
+    });
     $('#ouvrir').click(function(){
         body.attr('class', 'open');
 
@@ -248,15 +252,33 @@ $(function(){
 		
 		$(this).parent().find('input').click();
 	});
+
+    function open(elm, callBack){
+        elm = elm.click();
+        callBack(elm.val());
+    }
     
+    function print(val){
+        alert(val);
+    }
+
+
     $('#repere').click(function(){
-        alert("Enteredzzzz!");
+        open($('#first-input'), print);
+    });
 
-        $(this).parent().find('#first-input').click();
+    $('#seconnecter').click(function(){
+        let  emailUser = document.getElementById('login-email').value;
+        let  psw = document.getElementById('login-password').value;
+        matching_password = localStorage.getItem(emailUser);
+        
+        if(matching_password != null){
+        
+            if(psw === matching_password){
+                showSnackbar('Vous êtes connectés');
+            }
 
-        alert($('#first-input').val());
-
-        $('#send-path').val($('#first-input').val());
+        }
 
     });
 
@@ -285,7 +307,6 @@ $(function(){
         else {
             console.log(file.fileSize);
         }
-
 
 
         // console.log(file.name);
