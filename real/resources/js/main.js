@@ -117,7 +117,7 @@ function step(i){
         else if(i==6){
             stage.css('top', (-600 + '%'));
         }
-        
+
     }
 }
 
@@ -164,7 +164,41 @@ function validateForm(){
 }
 
 
+// Modal Logout 
 
+setInterval(myTimer, 1000);
+
+function myTimer(){
+    let d = new Date();
+    document.getElementById("hour").innerHTML = d.toLocaleTimeString().replace('PM', '');
+}
+
+
+function myModalShower(){
+    $('#logout-modal').css('visibility', 'visible');
+}
+
+let inactivityTime = function() {
+    let time;
+
+    window.onload = resetTimer;
+    document.onmousemove = resetTimer;
+    // document.onkeypress = resetTimer;
+
+    function myModalShower(){
+        $('#logout-modal').css('visibility', 'visible');
+    }
+
+    function resetTimer() {
+      clearTimeout(time);
+      time = setTimeout(myModalShower, 9000);
+    }
+
+};
+
+window.onload = function() {
+    inactivityTime();
+}
 
 // alert(emailUser);
 

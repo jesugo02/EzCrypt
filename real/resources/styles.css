@@ -348,6 +348,37 @@ table {
     color: rgb(4, 38, 38);
 }
 
+/* Logout Modal */
+
+#logout-modal{
+    visibility:hidden;
+    background-color: #4e5050;
+    /* margin-top: 80px;
+    margin-bottom: 20px; */
+    left: 0;
+    right: 0;
+    top: -48px;
+    bottom: 0;
+    z-index: 4;
+    height: 100vh;
+}
+
+#logout-modal h1{
+    font-family: Ubuntu;
+    font-size: 95px;
+    text-align: center;
+    color: rgb(255, 255, 255);
+   
+}
+
+#hour{
+    font-family: Ubuntu;
+    font-size: 65px;
+    font-weight: 900;
+    text-align: center;
+    color: rgb(5, 66, 61);
+}
+
 
 
 /* Buttons */
