@@ -3,6 +3,8 @@
 // Feel free to use any frontend framework you like :)
 // See more details: https://neutralino.js.org/docs/how-to/use-a-frontend-library
 
+Neutralino.init();
+
 function showInfo() {
     document.getElementById('info').innerHTML = `
         ${NL_APPID} is running on port ${NL_PORT}  inside ${NL_OS}
@@ -112,6 +114,10 @@ function step(i){
         else if(i==5){
             stage.css('top', (-500 + '%'));
         }
+        else if(i==6){
+            stage.css('top', (-600 + '%'));
+        }
+        
     }
 }
 
@@ -127,11 +133,14 @@ function validateForm(){
     let  psw1 = document.forms["signup"]["psw"].value;
     let  psw2 = document.forms["signup"]["psw-repeat"].value;
 
+    
     if (emailUser != "" && psw1 != "" && psw2 != "") {
         if(psw1 === psw2){
             if(psw1.length >= 5 && psw2.length >= 5){
-                User = new Utilisateur(emailUser, psw1);
-                localStorage.setItem(User.email, User.password);  
+                let User = new Utilisateur(emailUser, psw1);
+                alert(User.email);
+                Neutralino.storage.setData(User.email, psw1);
+                alert(Neutralino.storage.getData(User.email));
                 showSnackbar("Inscription effectuée avec succès");                
                 step(1);
     
@@ -227,11 +236,12 @@ $(function(){
         global_step = 3;
     });
 
-    $('#loged-in').click(function(){
-        this.fadeOut();
-        step(0);
-        showSnackbar("Vous êtes déconnectés");
-    });
+    // $('#loged-in').click(function(){
+    //     this.fadeOut();
+    //     step(0);
+    //     showSnackbar("Vous êtes déconnectés");
+    // });
+
     $('#ouvrir').click(function(){
         body.attr('class', 'open');
 
@@ -242,8 +252,8 @@ $(function(){
     $('#dashboard').click(function(){
         body.attr('class', 'dashboard');
 
-		step(3);
-        global_step = 3;
+		step(6);
+        global_step = 6;
     });
 
 
@@ -253,34 +263,41 @@ $(function(){
 		$(this).parent().find('input').click();
 	});
 
-    function open(elm, callBack){
-        elm = elm.click();
-        callBack(elm.val());
-    }
-    
-    function print(val){
-        alert(val);
-    }
-
-
     $('#repere').click(function(){
-        open($('#first-input'), print);
+
+        async function getInput(){
+            return Promise.resolve($('#first-input').click());
+        }
+
+        async function callGetInpt(){
+            var input = await getInput();
+            $('#send-path').val(input.val());
+        }
+
+        callGetInpt();
+
     });
+
+    
 
     $('#seconnecter').click(function(){
         let  emailUser = document.getElementById('login-email').value;
         let  psw = document.getElementById('login-password').value;
-        matching_password = localStorage.getItem(emailUser);
-        
+        matching_password = Neutralino.storage.getData(emailUser);
+        alert(matching_password);
         if(matching_password != null){
         
             if(psw === matching_password){
                 showSnackbar('Vous êtes connectés');
+            }   
+            else{
+                showSnackbar("Email ou Mot de passe incorrect. Réessayez");
             }
 
         }
 
     });
+    
 
     var file = null;
 
@@ -449,7 +466,6 @@ function  showSnackbar(message) {
 
 // END OF MY FUNCITONS
 
-Neutralino.init();
 
 Neutralino.events.on("trayMenuItemClicked", onTrayMenuItemClicked);
 Neutralino.events.on("windowClose", onWindowClose);

@@ -16,11 +16,18 @@ input{
 
 html{
 
-    /* scroll-behavior: smooth; */
+    scroll-behavior: smooth;
     overflow: hidden;
     transition: 0.1s;
 
 }
+
+/* body{ */
+    /* background-image: url(./icons/01.png); */
+    /* background-repeat: no-repeat; */
+    /* background-position: center;
+    background-size:    auto; */
+/* } */
 
 .center{
     position: relative;
@@ -156,10 +163,20 @@ a {
 
 .dark-mode-content a {
     color: white;
-    padding: 21.5px 21.5px;
+    padding: 22.5px 22.5px;
     text-decoration: none;
     margin: 0;
     display: block;
+}
+
+
+#login-sidebar{
+    border-bottom: 2px solid black;
+
+}
+#signup-sidebar{
+    border-bottom: 2px solid black;
+
 }
 
 .dark-mode-content a:hover {
@@ -280,6 +297,57 @@ a {
 #step5{
     background-color: white;
 }
+
+#step6{
+    background-color: #c2fdfc;
+    margin-top: 80px;
+    padding: 10px !important;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    overflow-y: scroll;
+    height: 5px;
+  }
+  
+  th, td {
+    text-align: center;
+    padding: 8px;
+  }
+  
+  th {
+    background-color: #1b7969;
+    color: white;
+  }
+
+  .dashboard-input{
+    box-shadow: 0 0 4px #D8E1E8;
+    width: 100% !important;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-bottom: 35px;
+    border: 1px solid #d5e3ec;
+    text-align: center;
+    color: #b12c2c;
+    font-family: Ubuntu;
+    font-size: 35px;
+    
+}
+
+.dashboard-input:focus{
+    background-color: #ddd;
+}
+
+#step6 h1{
+    font-family: Ubuntu;
+    font-size: 95px;
+    text-align: center;
+    color: rgb(4, 38, 38);
+}
+
 
 
 /* Buttons */
@@ -442,9 +510,13 @@ body.help {
     padding-left: 15px;
 } */
 
-body.dashboard .if-dashboard{
+body.dashboard .dashboard{
     display: block;
-   
+    background-color: #c2fdfc;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 110px;
+    padding-right: 110px;
 }
 
 
@@ -910,3 +982,15 @@ color: red !important;
     from {bottom: 50px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
 }
+
+.eye{
+    width: 20px; 
+    height:20px;
+    float: right;
+    cursor: pointer;
+}
+
+.eye-span{
+    padding-right:50px;
+}
+
