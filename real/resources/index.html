@@ -32,8 +32,8 @@
       <a class="side-a" href="#" id = "home"><span><img src="./icons/sidebar/house-chimney-solid.svg" alt="" style="width: 20px; height:17px;"></span> Home</a>
       <a class="side-a" href="#" id = "chiffrer"><span><img src="./icons/sidebar/lock-solid.svg" alt="" style="width: 20px; height:17px;"></span> Chiffrer</a>
       <a class="side-a" href="#" id = "dechiffrer"><span><img src="./icons/sidebar/lock-open-solid.svg" alt="" style="width: 20px; height:17px;"></span> Déchiffrer</a>
-      <a class="side-a" href="#" id = "aide"><span><img src="./icons/sidebar/circle-question-solid.svg" alt="" style="width: 20px; height:17px;"></span> Aide</a>
       <a class="side-a" href="#" id = "ouvrir"><span><img src="./icons/sidebar/folder-open-solid.svg" alt="" style="width: 20px; height:17px;"></span> Ouvrir</a>
+      <a class="side-a" href="#" id = "aide"><span><img src="./icons/sidebar/circle-question-solid.svg" alt="" style="width: 20px; height:17px;"></span> Aide</a>
       <a class="side-a" href="#" id = "dashboard"><span><img src="./icons/sidebar/chart-line-solid.svg" alt="" style="width: 20px; height:17px;"></span> Dashboard</a>
       <a class="side-a" href="#" id = "parametre"><span><img src="./icons/sidebar/gear-solid.svg" alt="" style="width: 20px; height:17px;"></span> Paramètre</a>
       <!-- <input type="submit" class="side-a" id = "loged-in" Connecté><span class="dot"></span>  -->
@@ -209,7 +209,8 @@
             </div>
             <div class="sub-back-color" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;">
               <div class="a-input">
-                <input class = "input-keys" type="password">
+                <input class = "input-keys" type="password" placeholder="***********************">
+                <input class = "input-keys" type="text" placeholder="/home/fakepath/file.txt">
                 <a class="button process ">Ok-Chiffrer</a>
               </div>
             </div>
@@ -236,9 +237,9 @@
       <div id="step5" class="center">
         <div class="center-child">
           <div class="content">
-            <h1 style="font-family: Ubuntu; font-size: 31px; margin-bottom: 65px;">Cliquez sur Enregistrer pour finaliser l'opération !</h1>
-            <a class="button download green">Enregistrer</a>
-          <div style="margin-top: 20px; font-weight:bolder">
+            <h1 style="color:rgb(4, 43, 49); font-family: Ubuntu; font-size: 31px; margin-bottom: 65px;">Cliquez sur Enregistrer pour finaliser l'opération !</h1>
+            <a class="button download">Enregistrer</a>
+          <div style="margin-top: 20px; color:rgb(4, 43, 49); font-weight:bolder">
             Sentez vous libre de partager vos fichiers chiffrés sans crainte... 
           </div>
           </div>
@@ -250,55 +251,113 @@
         <div class="center-child">
           <div class="content">
             <h1>Statistiques</h1>
-            <input class="dashboard-input" type="text" id="" disabled value="15 chiffrés ,  10 déchiffrés">
+            <input class="dashboard-input" type="text" id="" disabled value="03 chiffrés ,  02 déchiffrés">
             <table>
               <tr>
               <th>Fichier</th>
-              <th>Size</th>
+              <th>Taille</th>
+              <th>Date</th>
               <th>Algorithme</th>
+              <th>Opération</th>
               </tr>
               <tr>
               <td>test.js</td>
               <td>5Mo</td>
+              <td>07-08-2022 08:30:15</td>
               <td>AES-256</td>
+              <td>Chiffrement</td>
               </tr>
               <tr>
-                <td>test.js</td>
+                <td>text_to_crypt.txt</td>
                 <td>2Mo</td>
+                <td>07-08-2022 08:48:56</td>
                 <td>AES-128</td>
+                <td>Déchiffrement</td>
                 </tr>
               <tr>
 
                 <tr>
-                  <td>test.js</td>
+                  <td>jokers.mp4</td>
                   <td>4Mo</td>
+                  <td>07-08-2022 08:49:15</td>
                   <td>AES-256</td>
+                  <td>Déchiffrement</td>
                   </tr>
                 <tr>
                 
                   <tr>
-                    <td>test.js</td>
+                    <td>biblical.txt</td>
                     <td>289ko</td>
+                    <td>07-08-2022 08:56:12</td>
                     <td>AES-128</td>
+                    <td>Chiffrement</td>
                     </tr>
                   <tr>
+                    <tr>
+                      <td>use_to_be.mp3</td>
+                      <td>8Mo</td>
+                      <td>07-08-2022 9:56:12</td>
+                      <td>AES-128</td>
+                      <td>Chiffrement</td>
+                      </tr>
+                    <tr>
             </table>
+          </div>
+        </div>
+      </div>
+      <!-- Step7 Settings -->
+      <div id="step7">
+        <div>
+          <div class="content">
+            <h1>Paramètre</h1>
+            <div>
+              <label for="veille-time">Régler le temps de veille :</label><br><br>
+              <select id="veille">
+                <option value="15s">15s</option>
+                <option value="30s">30s</option>
+                <option value="1min">1min</option>
+                <option value="2min">2min</option>
+                <option value="5min">5min</option>
+              </select>
+              <br>
+              <br>
+              <label for="theme">Changer le thème d'affichage :</label><br><br>
+              <select id="theme">
+                <option value="clair">Clair</option>
+                <option value="sombre">Sombre</option>
+              </select>
+            </div>
+
           </div>
         </div>
       </div>
 
       <!-- Showing up elements -->
+     
       <!-- SnackBar -->
       <p id="snackbar"></p>
 
      
-      </div>
+    </div>
      <!-- Logout Modal -->
-    <div id="logout-modal" class="center">
+    <div id="logout-modal" class="center" >
       <div class="center-child">
         <div class="content">
-          <h1>EzCrypt</h1>
-        <div id = "hour"></div>
+          <h1>@EzCrypt</h1>
+
+          <div id = "hour">
+
+          </div>
+          <div id="date">
+
+          </div>
+          <p  id="info">Double-cliquez pour vous connecter</p>
+          <div id="logout-password" style = "left: 15px;">
+            <input id="hidden" style="margin-bottom: 50px; display: none;">
+            <input  id="logout-input" type="password" placeholder="**********">
+            <!-- <input type="checkbox" name="" id="logout-checkbox"  onclick="hidepsd()"><br> -->
+            <a class = "logout-button" href="#" id = 'logout-a'>Se connecter</a>
+          </div>
       </div>
     </div>
 
@@ -311,40 +370,16 @@
 
       function hidepsd(){
        
-          alert("1");
-          var input1 = $(this).parent().parent().find('input[type=password]');
-          alert("2  " + input1.attr("type") + " " + input1.attr("class") );
+          var input = $("#logout-input");
 
-          if (input1.attr("type") == "password") {
-              input1.attr("type", "text");
-              alert("3");
+          if (input.attr("type") == "password") {
+              input.attr("type", "text");
           }else {
               input1.attr("type", "password");
-              alert("4");
           }
       }
 
       function dataStore(){
-
-        const customerData = [
-            { ssn: "444-44-4444", name: "Bill", age: 35, email: "bill@company.com" },
-            { ssn: "555-55-5555", name: "Donna", age: 32, email: "donna@home.org" }
-        ];
-
-        var id = 1;
-
-        for (var i in customerData) {
-
-            Neutralino.storage.setData(id, customerData[i]);
-            id = id + 1;
-
-        }
-
-        for (var i in customerData){
-            let data = Neutralino.storage.getData(id);
-            console.log(data);
-        }
-
 
       }
 

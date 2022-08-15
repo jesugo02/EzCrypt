@@ -22,6 +22,12 @@ html{
 
 }
 
+#info{
+    text-align: center;
+    margin-top: 50px;
+    font-family: Ubuntu;
+}
+
 /* body{ */
     /* background-image: url(./icons/01.png); */
     /* background-repeat: no-repeat; */
@@ -111,19 +117,23 @@ a {
 #app-title{
     margin-left: 300px;   
 }
-/* #right-arrows{
-    padding-top: 2px;
-    padding-bottom: 2px;
+#top-navbar{
+    padding: 0px;
+}
+#right-arrows{
+    margin: 0px;
+    padding: 10px;
+    
 }
 
 #left-arrows{
-    padding-top: 2px;
-    padding-bottom: 2px;
-} */
+    margin: 0px;
+    padding: 10px;
+}
 
 #right-arrows:hover{
     background-color: red;
-  
+ 
     /* z-index: -1; */
 }
 
@@ -163,7 +173,7 @@ a {
 
 .dark-mode-content a {
     color: white;
-    padding: 22.5px 22.5px;
+    padding: 18px 18px;
     text-decoration: none;
     margin: 0;
     display: block;
@@ -172,11 +182,11 @@ a {
 
 #login-sidebar{
     border-bottom: 2px solid black;
-
+    padding: 5px;
 }
 #signup-sidebar{
     border-bottom: 2px solid black;
-
+    padding: 5px;
 }
 
 .dark-mode-content a:hover {
@@ -314,6 +324,7 @@ table {
   th, td {
     text-align: center;
     padding: 8px;
+    font-weight: 17px;
   }
   
   th {
@@ -321,10 +332,24 @@ table {
     color: white;
   }
 
+  .logout-button{
+    display: inline-block;
+    align-self: none;
+    padding: 1rem 1.5rem;
+    border-radius: 0px;
+    font-size: 1rem;
+    font-weight: 800;
+    box-shadow: 0 0 5px #D8E1E8 ;
+    margin-bottom: 7px;
+    color :#ffffff !important;
+    border: 2px solid #12caab;
+    background-color: #055857;
+  }
   .dashboard-input{
     box-shadow: 0 0 4px #D8E1E8;
     width: 100% !important;
     font-size: 1.1rem;
+    font-weight: bolder;
     padding: 0.5rem 1rem;
     border-radius: 5px;
     margin-top: 20px;
@@ -352,14 +377,14 @@ table {
 
 #logout-modal{
     visibility:hidden;
-    background-color: #4e5050;
+    background-color: #74f1f1;
     /* margin-top: 80px;
     margin-bottom: 20px; */
     left: 0;
     right: 0;
-    top: -48px;
+    top: -88px;
     bottom: 0;
-    z-index: 4;
+    z-index: 3;
     height: 100vh;
 }
 
@@ -367,7 +392,7 @@ table {
     font-family: Ubuntu;
     font-size: 95px;
     text-align: center;
-    color: rgb(255, 255, 255);
+    color: rgb(8, 77, 77);
    
 }
 
@@ -376,11 +401,45 @@ table {
     font-size: 65px;
     font-weight: 900;
     text-align: center;
-    color: rgb(5, 66, 61);
+    color: rgb(255, 255, 255);
 }
 
+#date{
+    font-family: Ubuntu;
+    font-size: 35px;
+    font-weight: 900;
+    text-align: center;
+    color: rgb(255, 255, 255);
+}
 
+#logout-input{
+    box-shadow: 0 0 4px #D8E1E8;
+    width: 100%;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    margin-top: 20px;
+    background-color: #787b7b;
+    border: 3px solid #000000;
+    color: white;
+}
 
+#logout-password input[type = checkbox]{
+    width: 25px;
+    height: 25px;
+}
+
+#logout-modal{
+    background-image: url();
+    /* background-image: url(Writing\ room-bro.svg); */
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+}
+
+#logout-a{
+    cursor: pointer;
+}
 /* Buttons */
 
 .button-home{
@@ -550,7 +609,50 @@ body.dashboard .dashboard{
     padding-right: 110px;
 }
 
-
+body.parametre .parametre{
+    display: block;
+    background-color: #c2fdfc;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 110px;
+    padding-right: 110px;
+}
+#step7{
+    top: 100px;
+    padding-left: 0px !important;
+    background-color: white;
+    background-image: url(./secure-data-animate.svg);
+    background-repeat: no-repeat;
+    background-size: auto 500px;
+    background-position: right top;
+}
+#step7 h1{
+    font-family: Ubuntu;
+    font-size: 65px;
+    text-align:left;
+    color: rgb(4, 38, 38);
+    margin-bottom: 20px;
+}
+#step7 label{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+}
+#step7 select{
+    box-shadow: 0 0 4px #D8E1E8;
+    width: 55% !important;
+    font-size: 1.1rem;
+    font-weight: bolder;
+    padding: 0.5rem 0.5rem;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-bottom: 35px;
+    border: 1px solid #d5e3ec;
+    text-align: center;
+    color: #b12c2c;
+    background-color: white;
+    font-family: Ubuntu;
+    font-size: 35px;
+}
 /* .content{
 	position:absolute;
 	text-align:center;
@@ -824,7 +926,7 @@ body.dashboard .dashboard{
     width: 100%;
     height: 95%;
     overflow: hidden; 
-    background-color: #c2fdfc;
+    background-color: #f7f7f7;
     padding-top: 5px;
     padding-bottom: 5px;
     color: black;
@@ -882,7 +984,7 @@ hr{
 
 #step5{
     /* width: 45%; */
-    top: 15%;
+    top: 75px;
     padding-left: 15px !important;
     padding-right: 60px;
     padding-top: 15px;
@@ -959,7 +1061,7 @@ color: red !important;
     border-radius: 2px;
     padding: 16px;
     position: fixed;
-    z-index: 1;
+    z-index: 4;
     left: 65%;
     bottom: 50px;
     font-size: 15px;

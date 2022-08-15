@@ -77,7 +77,10 @@ var body  = $('body'),
 	back  = $('#left-arrows'),
     next  = $('#right-arrows');
 
-var fileCmp = 0;            
+var emailUser;
+
+var fileCmp = 0;      
+var timeOut = 12000;     
 
 let User;
 let UserListe = [];
@@ -117,6 +120,10 @@ function step(i){
         else if(i==6){
             stage.css('top', (-600 + '%'));
         }
+        else if(i==7){
+            stage.css('top', (-700 + '%'));
+        }
+
 
     }
 }
@@ -129,7 +136,7 @@ function next_step(){
 function validateForm(){
     // alert(UserListe.length);
     // alert("You kidding me!!");
-    let  emailUser = document.forms["signup"]["email"].value;
+    emailUser = document.forms["signup"]["email"].value;
     let  psw1 = document.forms["signup"]["psw"].value;
     let  psw2 = document.forms["signup"]["psw-repeat"].value;
 
@@ -138,9 +145,11 @@ function validateForm(){
         if(psw1 === psw2){
             if(psw1.length >= 5 && psw2.length >= 5){
                 let User = new Utilisateur(emailUser, psw1);
+                User.email = User.email.replace('@','');
+                User.email = User.email.replace('.','');
                 alert(User.email);
-                Neutralino.storage.setData(User.email, psw1);
-                alert(Neutralino.storage.getData(User.email));
+                localStorage.setItem(User.email, psw1);
+                alert(localStorage.getItem(User.email));
                 showSnackbar("Inscription effectuée avec succès");                
                 step(1);
     
@@ -165,12 +174,20 @@ function validateForm(){
 
 
 // Modal Logout 
+const days = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
 
+const mounth = ["Janvier","Fevrier","Mars","Avril","Mai","Juin","Juiellet","Août","Septembre","Octobre","Novembre","Decembre"]
 setInterval(myTimer, 1000);
 
 function myTimer(){
+
     let d = new Date();
-    document.getElementById("hour").innerHTML = d.toLocaleTimeString().replace('PM', '');
+    let hour = (d.getHours().toString().length == 1 ) ? ('0' + d.getHours().toString()) : d.getHours().toString();
+    let min = (d.getMinutes().toString().length == 1) ? ('0' + d.getMinutes().toString()) : d.getMinutes().toString();
+  
+    document.getElementById("hour").innerHTML = hour + ':' + min ;
+    document.getElementById("date").innerHTML = days[d.getDay()-1] + ' ' + d.getDate()  + ' ' + mounth[d.getMonth()];
+
 }
 
 
@@ -183,6 +200,9 @@ let inactivityTime = function() {
 
     window.onload = resetTimer;
     document.onmousemove = resetTimer;
+    document.onkeydown = resetTimer;
+    document.onclick = resetTimer;
+    // document.onpointerlockchange = resetTimer;
     // document.onkeypress = resetTimer;
 
     function myModalShower(){
@@ -191,14 +211,91 @@ let inactivityTime = function() {
 
     function resetTimer() {
       clearTimeout(time);
-      time = setTimeout(myModalShower, 9000);
+      time = setTimeout(myModalShower, timeOut);
     }
 
 };
 
-window.onload = function() {
-    inactivityTime();
-}
+$('#logout-password').fadeOut();
+
+inactivityTime();
+
+let identifier = 1;
+
+// function showLogin(){
+//     if(identifier == 1){
+//         $('#logout-modal h1').fadeOut();
+//         $('#hour').fadeOut();
+//         $('#date').fadeOut();
+//         $('#info').fadeOut();
+//         $('#logout-password').fadeIn();
+//         i = 2;
+//     }else if(i == 2){
+//         $('#logout-password').fadeOut();
+//         $('#info').fadeOut();
+//         $('#logout-modal h1').fadeIn();
+//         $('#hour').fadeIn();
+//         $('#date').fadeIn();
+//         i=1;
+//     }   
+// }
+
+
+$('#logout-modal').dblclick(function(){
+    
+    if(identifier == 1){
+        $(this).css("background-image", "url('./Secure\ data-pana.svg')");
+        $('#logout-modal h1').fadeOut();
+        $('#hour').fadeOut();
+        $('#date').fadeOut();
+        $('#info').fadeOut();
+        $('#logout-password').fadeIn();
+        identifier = 2;
+     
+    }
+    else{
+        $(this).css('background-image', 'none');
+        $('#logout-password').fadeOut();
+        $('#info').fadeIn();
+        $('#logout-modal h1').fadeIn();
+        $('#hour').fadeIn();
+        $('#date').fadeIn();
+        identifier=1;
+           
+    }  
+
+});
+
+$('#logout-a').click(function(){
+
+    let  password  = $('#logout-input').val();
+    let  matching_password = localStorage.getItem(emailUser.replace('@','').replace('.','')); 
+
+    if(password.length == 0){
+        showSnackbar("Veillez entrer un mot de passe !");
+        return;
+    }
+    else{
+       if(password == matching_password){
+           $('#logout-modal').css('visibility', 'hidden');
+           $('#logout-input').val('');
+           showSnackbar("Bienvenu à nouveau");
+       }
+       else{
+            // alert("enter else");
+            showSnackbar("Mot de passe Incorrect. Réessayez svp...");
+            $('#logout-input').val('');
+       }
+   }
+});
+
+
+// if( $('#logout-modal').css('visibility') == "visible"){
+    
+// }
+
+
+
 
 // alert(emailUser);
 
@@ -290,7 +387,12 @@ $(function(){
         global_step = 6;
     });
 
+    $('#parametre').click(function(){
+        body.attr('class', 'parametre');
 
+		step(7);
+        global_step = 7;
+    });
 
     $('#step3 .button').click(function(){
 		
@@ -312,17 +414,21 @@ $(function(){
 
     });
 
+   
     
 
     $('#seconnecter').click(function(){
         let  emailUser = document.getElementById('login-email').value;
         let  psw = document.getElementById('login-password').value;
-        matching_password = Neutralino.storage.getData(emailUser);
+        
+        matching_password = localStorage.getItem(emailUser.replace('@','').replace('.',''));
         alert(matching_password);
         if(matching_password != null){
         
             if(psw === matching_password){
                 showSnackbar('Vous êtes connectés');
+                $('#login-email').val('');
+                $('#login-password').val('');
             }   
             else{
                 showSnackbar("Email ou Mot de passe incorrect. Réessayez");
@@ -387,15 +493,30 @@ $(function(){
 
 		var input = $(this).parent().find('input[type=password]'),
 			a = $('#step5 a.download'),
-			password = input.val();
+			password = input.val()
+            input1 = $(this).parent().find('input[type=text]');
 
 		input.val('');
 
 		if(password.length<5){
-			showSnackbar('Choisissez une plus longue clé!');
+            if(password.length==0){
+                showSnackbar('Veillez renseigner une clé de chiffrement !');
+                return;
+            }
+			showSnackbar('Choisissez une plus longue clé !');
 			return;
 		}
+        else if(input1.val() == undefined || input1.val().toString().length == 0){
+            showSnackbar('Renseigner le chemin entier du fichier pour finaliser');
+            return;
+        }
+        try{
+            Neutralino.filesystem.removeFile(input1.val().toString());
 
+        }catch(err){
+            showSnackbar("Le chemin est invalide. Réessayez");
+            return;
+        }
         var reader = new FileReader();
 
 		if(body.hasClass('encrypt')){
@@ -422,7 +543,8 @@ $(function(){
 
 			reader.readAsDataURL(file);
             $('#step5 a').click(function(){
-                showSnackbar("En cours... Consulter votre dossier et téléchargement")
+                showSnackbar("En cours... Consulter votre dossier et téléchargement");
+                step(1);
             });
 		}
 		else {
