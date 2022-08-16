@@ -80,11 +80,13 @@ var body  = $('body'),
 var emailUser;
 
 var fileCmp = 0;      
-var timeOut = 12000;     
+var timeOut = 120000;     
 
 let User;
 let UserListe = [];
 let FileListe = [];
+
+$('#decryption-path').val('zerta');
 
 function step(i){
 
@@ -295,6 +297,18 @@ $('#logout-a').click(function(){
 // }
 
 
+let getUsername = async () => {
+    const key = NL_OS == 'Windows' ? 'USERNAME' : 'USER';
+    let value = '';
+    try {
+        value = await Neutralino.os.getEnv(key);
+    }
+    catch(err) {
+        console.error(err);
+    }
+    return value;
+}
+  
 
 
 // alert(emailUser);
@@ -399,21 +413,174 @@ $(function(){
 		$(this).parent().find('input').click();
 	});
 
-    $('#repere').click(function(){
+    // function hidden_decryption(hidden_file, password){
+        
+    //     var reader = new FileReader();
+    //     let a = $('#hidden-a');
 
-        async function getInput(){
-            return Promise.resolve($('#first-input').click());
-        }
+    //     reader.onload = function(e){
 
-        async function callGetInpt(){
-            var input = await getInput();
-            $('#send-path').val(input.val());
-        }
+    //         var decrypted = CryptoJS.AES.decrypt(e.target.result, password)
+    //                                 .toString(CryptoJS.enc.Latin1);
 
-        callGetInpt();
+    //         if(!/^data:/.test(decrypted)){
+    //             showSnackbar("Mot de passe incorrect. Réessayez... ");
+    //             return false;
+    //         }
+
+    //         a.attr('href', decrypted);
+    //         a.attr('download', file.name.replace('.ezcrypt',''));
+
+    //         step(5);
+    //         global_step = 5;
+    //     };
+
+    //     reader.readAsText(hidden_file);
+
+    // }
+
+    let command = '';
+    let full_path = '';
+    let hidden_password = '';
+    
+
+    // $('#step3').on('change', '#first-input', function(e){
+
+    //     if(e.target.files.length!=1){
+    //         showSnackbar('Choisissez un fichier à déchiffrer!');
+    //         return false;
+    //     }
+
+    //     let hidden_file = e.target.files[0];
+    //     // step(4);
+    //     // global_step = 4;
+
+    //     var reader = new FileReader();
+    //     let a = $('#hidden-a');
+
+    //     reader.onload = function(e){
+            
+    //         var decrypted = CryptoJS.AES.decrypt(e.target.result, password)
+    //                                 .toString(CryptoJS.enc.Latin1);
+
+    //         if(!/^data:/.test(decrypted)){
+    //             showSnackbar("Mot de passe incorrect. Réessayez... ");
+    //             return false;
+    //         }
+
+    //         a.attr('href', decrypted);
+    //         a.attr('download', file.name.replace('.ezcrypt',''));
+
+
+    //         step(5);
+    //         global_step = 5;
+    //     };
+
+    //     reader.readAsText(hidden_file);
+    // });
+
+
+    $('#repere').click( async function(){
+
+        let  input = $('#first-input');
+        
+        
+        $('#first-input').click();
+
+        $('#first-input').on('change', async function(e){
+            
+            let value = input.val().toString().replace('C:\\fakepath\\','/Downloads/');
+            let file_name = input.val().toString().replace('C:\\fakepath\\','');;
+            let name =  await getUsername();
+            
+            hidden_password = $('#hidden_password').val();
+            
+            full_path = "/home/" + name + value;
+            
+            $('#send-path').val(full_path);
+            
+            let hidden_path = '/home/'+ name + '/Downloads' + '/.ez';
+            
+            Neutralino.filesystem.createDirectory(hidden_path);
+            
+            command ='xdg-open ' + hidden_path + '/' + file_name;
+
+            command = command.replace('.ezcrypt', '');
+
+            Neutralino.filesystem.copyFile(full_path , hidden_path);
+            
+            //showSnackbar("File must be in Downloads folder ...");
+
+            //////////////////////////////
+
+            alert("just before");
+
+            if(e.target.files.length!=1){
+                
+                alert("dark zone");
+                showSnackbar('Choisissez un fichier à déchiffrer!');
+                return false;
+            
+            }
+
+            alert("just after");
+
+            let hidden_file = e.target.files[0];            
+            // alert(hidden_file);
+
+            var reader = new FileReader();
+            
+            
+            reader.onload = async function(e){
+                
+
+                var element = document.createElement('a');
+                alert("entered onloading....");
+
+                
+                var decrypted = CryptoJS.AES.decrypt(e.target.result, hidden_password).toString(CryptoJS.enc.Latin1);
+                
+                
+                alert("just after onloading...");
+                
+                if(!/^data:/.test(decrypted)){
+
+                    showSnackbar("Mot de passe incorrect. Réessayez..");
+                    return false;
+                
+                }
+
+                alert("preparing download link");
+
+                element.setAttribute('href', decrypted);
+                element.setAttribute('download', hidden_file.name.replace('.ezcrypt',''));     
+                let a_fix = document.getElementById('send-path');
+                a_fix.appendChild(element);
+                element.click();
+
+                a_fix.removeChild(element);
+                
+                await Neutralino.filesystem.moveFile(full_path.replace('.ezcrypt', '') , hidden_path);
+
+
+            };
+      
+            reader.readAsText(hidden_file);
+        
+        
+        });
+           
+        //////////////////////////////
+        
 
     });
 
+    $('a.browse.red').click(function(){
+
+        Neutralino.os.execCommand(command, {background : true});
+        // $('#input-path').val('');
+
+    });
    
     
 
@@ -451,19 +618,19 @@ $(function(){
 		}
 
         file = e.target.files[0];
-
-        if ('name' in file) {
-            console.log(file.name);
-        }
-        else {
-            console.log(file.fileName);
-        }
-        if ('size' in file) {
-            console.log(file.size);
-        }
-        else {
-            console.log(file.fileSize);
-        }
+        
+        // if ('name' in file) {
+        //     console.log(file.name);
+        // }
+        // else {
+        //     console.log(file.fileName);
+        // }
+        // if ('size' in file) {
+        //     console.log(file.size);
+        // }
+        // else {
+        //     console.log(file.fileSize);
+        // }
 
 
         // console.log(file.name);
@@ -483,7 +650,7 @@ $(function(){
 			return false;
 		}
 
-		file = e.target.files[0];
+		file =  e.target.files[0];
 		step(4);
         global_step = 4;
 	});
@@ -493,10 +660,13 @@ $(function(){
 
 		var input = $(this).parent().find('input[type=password]'),
 			a = $('#step5 a.download'),
-			password = input.val()
+			password = input.val(),
             input1 = $(this).parent().find('input[type=text]');
 
+
 		input.val('');
+        // password.val('');
+        // input1.val('');
 
 		if(password.length<5){
             if(password.length==0){
@@ -506,17 +676,11 @@ $(function(){
 			showSnackbar('Choisissez une plus longue clé !');
 			return;
 		}
-        else if(input1.val() == undefined || input1.val().toString().length == 0){
+        else if(input1.val() != "zerta" && (input1.val() == undefined || input1.val().toString().length == 0)){
             showSnackbar('Renseigner le chemin entier du fichier pour finaliser');
             return;
         }
-        try{
-            Neutralino.filesystem.removeFile(input1.val().toString());
-
-        }catch(err){
-            showSnackbar("Le chemin est invalide. Réessayez");
-            return;
-        }
+        
         var reader = new FileReader();
 
 		if(body.hasClass('encrypt')){
@@ -546,6 +710,7 @@ $(function(){
                 showSnackbar("En cours... Consulter votre dossier et téléchargement");
                 step(1);
             });
+            alert(Neutralino.filesystem.removeFile(input1.val().toString()));
 		}
 		else {
 
@@ -557,8 +722,10 @@ $(function(){
 										.toString(CryptoJS.enc.Latin1);
 
 				if(!/^data:/.test(decrypted)){
+
 					showSnackbar("Mot de passe incorrect. Réessayez... ");
 					return false;
+
 				}
 
 				a.attr('href', decrypted);
@@ -569,6 +736,14 @@ $(function(){
 			};
 
 			reader.readAsText(file);
+
+            $('#step5 a').click(function(){
+                showSnackbar("En cours... Consulter votre dossier et téléchargement");
+                step(1);
+            });
+            // alert(Neutralino.filesystem.removeFile(input1.val().toString()));
+
+            
 		}
 	});
 

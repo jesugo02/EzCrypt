@@ -175,12 +175,14 @@
 
           <div class="content if-open">
 
-            <h1>Choisissez le fichier à ouvrir</h1>
+            <h1>Choisissez le fichier chiffré à ouvrir</h1>
             <div class="flex">
               <a class="browse" id="repere">Choisir</a>
               <input type="file" id="first-input">
+              <input class="input-path" type="text" id = "hidden_password">
               <input class="input-path" type="text" id="send-path" placeholder="Entrez le chemin entier du fichier...">
               <a class="browse red">Ouvrir</a>
+              <a id="hidden-a"></a>
               
             </div>
             
@@ -209,8 +211,8 @@
             </div>
             <div class="sub-back-color" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;">
               <div class="a-input">
-                <input class = "input-keys" type="password" placeholder="***********************">
-                <input class = "input-keys" type="text" placeholder="/home/fakepath/file.txt">
+                <input class = "input-keys" type="password" placeholder="***************">
+                <input class = "input-keys" type="text" id = "encryption-path"placeholder="/home/fakepath/file.txt">
                 <a class="button process ">Ok-Chiffrer</a>
               </div>
             </div>
@@ -224,6 +226,7 @@
             <div class="sub-back-color" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;">
               <div class="a-input">
                 <input class = "input-keys" type="password">
+                <input class = "input-keys" type="text" id = "decryption-path" placeholder="/home/fakepath/file.txt" style="display:none;">
                 <a class="button process">Ok-Déchiffrer</a>
               </div>
             </div>
