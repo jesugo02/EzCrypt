@@ -1,10 +1,8 @@
 class Fichier{
     
-    constructor(IdFichier, nom, taille, chemin, contenue){
-    
-        this.IdFichier      = IdFichier;
+    constructor(nom, taille, contenue){
+
         this.nom            = nom;
-        this.chemin         = chemin;
         this.taille         = taille;
         this.contenue  = contenue;
 
@@ -38,13 +36,14 @@ class Utilisateur{
 
 }
 
-class Chiffrement{
+class Operation{
 
-    constructor(IdFichier, IdUser, IdAlgo, dateChiffrement, cleChiffrement){
+    constructor(nomFichier, tailleFichier, nomAlgo, nomOperation, dateChiffrement, cleChiffrement){
 
-        this.IdFichier          = IdFichier;
-        this.IdUser             = IdUser;
-        this.IdAlgo             = IdAlgo;
+        this.nomFichier         = nomFichier;
+        this.tailleFichier      = tailleFichier;
+        this.nomAlgo            = nomAlgo;
+        this.nomOperation       = nomOperation
         this.dateChiffrement    = dateChiffrement;
         this.cleChiffrement     = cleChiffrement;
 
@@ -52,26 +51,13 @@ class Chiffrement{
 
 }
 
-class Dechiffrement{
 
-    constructor(IdFichier, IdUser, IdAlgo, dateChiffrement, cleDechiffrement){
-
-        this.IdFichier          = IdFichier;
-        this.IdUser             = IdUser;
-        this.IdAlgo             = IdAlgo;
-        this.dateChiffrement    = dateChiffrement;
-        this.cleDechiffrement   = cleDechiffrement;
-
-    }
-
-}
 
 class Algorithme{
 
-    constructor(IdAlgo, libelle){
+    constructor(nomAlgo){
 
-        this.IdAlgo     = IdAlgo;
-        this.libelle    = libelle;
+        this.nomAlgo     = nomAlgo;
 
     }
 

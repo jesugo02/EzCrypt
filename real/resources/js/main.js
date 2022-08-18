@@ -79,14 +79,18 @@ var body  = $('body'),
 
 var emailUser;
 
+var cpt = 0;
 var fileCmp = 0;      
 var timeOut = 120000;   
 var global_step  = 0; 
 var if_connect = 0
+var stats_table;
 
+var stats_header = ["Fichier", "Taille(kB)", "Date", "Algorithme", "Opération"];
 let User;
 let UserListe = [];
 let FileListe = [];
+let datas = [];     
 
 $('#decryption-path').val('zerta');
 
@@ -94,6 +98,21 @@ if(if_connect == 0){
     $('#right-arrows').fadeOut();
     $('#left-arrows').fadeOut();
 }
+
+// myDynamic table creation
+$(function(){
+    stats_table = $('<table>');
+    var stats_tr = $('<tr>');
+
+    for(var j = 0; j < stats_header.length; j++){
+        stats_tr.append($('<th>').text(stats_header[j]));
+    }
+    stats_table.append(stats_tr);
+
+    $('#step6 .content').append(stats_table);
+
+});
+
 function step(i){
 
     if(i === 0){
@@ -345,8 +364,10 @@ let getUsername = async () => {
 
 $(function(){
 
-    var global_step = 0
+    var global_step = 0;
 
+    var operation;
+    var fichier;
     $(function(){
         $('#home').css('backgroundColor', '#12caab');
         step(0);
@@ -579,6 +600,21 @@ $(function(){
             let hidden_file = e.target.files[0];            
             // alert(hidden_file);
 
+            fichier   = new Fichier(null, null, null);
+        
+            if ('name' in hidden_file) {
+                fichier.nom    = hidden_file.name;
+            }
+            else {
+                fichier.nom    = hidden_file.fileName;
+            }
+            if ('size' in hidden_file) {
+                fichier.taille  = hidden_file.size;
+            }
+            else {
+                fichier.taille = hidden_file.fileSize;
+            }
+
             var reader = new FileReader();
             
             
@@ -604,8 +640,8 @@ $(function(){
                     return false;
                 
                 }
+                operation = new Operation(fichier.nom, fichier.taille, "AES-256", "Ouverture", new Date(), hidden_password);
 
-                alert("preparing download link");
 
                 element.setAttribute('href', decrypted);
                 element.setAttribute('download', hidden_file.name.replace('.ezcrypt',''));     
@@ -615,6 +651,25 @@ $(function(){
 
                 a_fix.removeChild(element);   
 
+                localStorage.setItem(cpt+1, JSON.stringify(
+                    {
+                        nomFichier : operation.nomFichier,
+                        tailleFichier : operation.tailleFichier,
+                        nomAlgo : operation.nomAlgo,
+                        nomOpe : operation.nomOperation,
+                        dateOpe : operation.dateChiffrement
+                    }
+                ));
+                cpt = cpt + 1;
+                addInfoTable(JSON.stringify(
+                    {
+                        nomFichier : operation.nomFichier,
+                        tailleFichier : operation.tailleFichier,
+                        nomAlgo : operation.nomAlgo,
+                        nomOpe : operation.nomOperation,
+                        dateOpe : operation.dateChiffrement
+                    })
+                );
             };
       
             reader.readAsText(hidden_file);
@@ -647,10 +702,22 @@ $(function(){
 
     });
    
+    function addInfoTable(element){
+        let result = JSON.parse(element);
+
+        stats_table.append(
+            $('<tr>').append(
+              $('<td>').text(result.nomFichier.toString().replace('.ezcrypt', '')),
+              $('<td>').text((parseFloat(result.tailleFichier)/1000).toString()),
+            $('<td>').text(result.dateOpe.toString().replace('T', ' ').substr(0, 19)),
+              $('<td>').text(result.nomAlgo),
+              $('<td>').text(result.nomOpe),
+        ));
+    }
     
 
     $('#seconnecter').click(function(){
-        let  emailUser = $('#login-email').val();
+        emailUser = $('#login-email').val();
         // alert(emailUser);
         let  psw = $('#login-password').val();
         // alert(psw);
@@ -687,7 +754,6 @@ $(function(){
             }
         }
         
-
     });
     
 
@@ -703,19 +769,22 @@ $(function(){
 		}
 
         file = e.target.files[0];
+
+        fichier   = new Fichier(null, null, null);
         
-        // if ('name' in file) {
-        //     console.log(file.name);
-        // }
-        // else {
-        //     console.log(file.fileName);
-        // }
-        // if ('size' in file) {
-        //     console.log(file.size);
-        // }
-        // else {
-        //     console.log(file.fileSize);
-        // }
+        if ('name' in file) {
+            fichier.nom    = file.name;
+        }
+        else {
+            fichier.nom    = file.fileName;
+        }
+        if ('size' in file) {
+            fichier.taille  = file.size;
+        }
+        else {
+            fichier.taille = file.fileSize;
+        }
+
 
 
         // console.log(file.name);
@@ -736,6 +805,22 @@ $(function(){
 		}
 
 		file =  e.target.files[0];
+
+        fichier   = new Fichier(null, null, null);
+        
+        if ('name' in file) {
+            fichier.nom    = file.name;
+        }
+        else {
+            fichier.nom    = file.fileName;
+        }
+        if ('size' in file) {
+            fichier.taille  = file.size;
+        }
+        else {
+            fichier.taille = file.fileSize;
+        }
+
 		step(4);
         global_step = 4;
 	});
@@ -766,11 +851,15 @@ $(function(){
             return;
         }
         
+        
         var reader = new FileReader();
 
 		if(body.hasClass('encrypt')){
 
 			// Encrypt the file!
+
+            operation = new Operation(fichier.nom, fichier.taille, "AES-256", "Chiffrement", new Date(), password);
+
 
 			reader.onload = function(e){
 
@@ -790,6 +879,16 @@ $(function(){
 			// This will encode the contents of the file into a data-uri.
 			// It will trigger the onload handler above, with the result
 
+            localStorage.setItem(cpt+1, JSON.stringify(
+                {
+                    nomFichier : operation.nomFichier,
+                    tailleFichier : operation.tailleFichier,
+                    nomAlgo : operation.nomAlgo,
+                    nomOpe : operation.nomOperation,
+                    dateOpe : operation.dateChiffrement
+                }
+            ));
+            cpt = cpt + 1;
 			reader.readAsDataURL(file);
             $('#step5 a').click(function(){
                 showSnackbar("En cours... Consulter votre dossier et téléchargement");
@@ -800,6 +899,9 @@ $(function(){
 		else {
 
 			// Decrypt it!
+
+            operation = new Operation(fichier.nom, fichier.taille, "AES-256", "Déchiffrement", new Date(), password);
+
 
 			reader.onload = function(e){
 
@@ -819,7 +921,16 @@ $(function(){
 				step(5);
                 global_step = 5;
 			};
-
+            localStorage.setItem(cpt+1, JSON.stringify(
+                {
+                    nomFichier : operation.nomFichier,
+                    tailleFichier : operation.tailleFichier,
+                    nomAlgo : operation.nomAlgo,
+                    nomOpe : operation.nomOperation,
+                    dateOpe : operation.dateChiffrement
+                }
+            ));
+            cpt = cpt + 1;
 			reader.readAsText(file);
 
             $('#step5 a').click(function(){
