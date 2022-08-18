@@ -57,15 +57,15 @@
       <div id="step0" class="center">
           <div class="center-child">
             <div class="cover">
-              <h1 class="h1-home">
+              <h1 class="h1-home"  id = "h1-first-home">
                 Choisissez EzCrypt, 
               </h1>
-              <h1><!--  -->
+              <h1 id = "h1-second-home"><!--  -->
                 Sécurisez vos données personnelles. 
               </h1>
               <h3>Protégez votre vie privée.</h3>
   
-              <a class = "button-home" id="en_savoir_plus"><img src="./icons/sidebar/circle-info-solid.svg" alt="" style="width: 20px; height:17px;"> En savoir plus</a>
+              <a class = "button-home" id="en_savoir_plus"><img src="./icons/sidebar/circle-info-solid.svg" style="width: 20px; height:17px;"> En savoir plus</a>
               <a class = "button-home" id="commencer">Commencer <img src="./icons/sidebar/right-to-bracket-solid.svg" alt="" style="width: 20px; height:17px;"></a>
             </div>
           </div>           
@@ -250,62 +250,12 @@
       </div>
 
       <!-- Step6 Dashboard -->
-      <div id="step6" class="center">
+      <div id="step6" class="center" style="overflow-y:auto !important; overflow-y: auto !important;">
         <div class="center-child">
-          <div class="content">
-            <h1>Statistiques</h1>
-            <input class="dashboard-input" type="text" id="" disabled value="03 chiffrés ,  02 déchiffrés">
-                  
-            <!-- <table>
-              <tr>
-              <th>Fichier</th>
-              <th>Taille</th>
-              <th>Date</th>
-              <th>Algorithme</th>
-              <th>Opération</th>
-              </tr>
-              <tr>
-              <td>test.js</td>
-              <td>5Mo</td>
-              <td>07-08-2022 08:30:15</td>
-              <td>AES-256</td>
-              <td>Chiffrement</td>
-              </tr>
-              <tr>
-                <td>text_to_crypt.txt</td>
-                <td>2Mo</td>
-                <td>07-08-2022 08:48:56</td>
-                <td>AES-128</td>
-                <td>Déchiffrement</td>
-                </tr>
-              <tr>
+          <h1>Statistiques</h1>
+          <input class="dashboard-input" type="text" id="" disabled value="0 chiffré(s) 0 déchiffré(s) 0 ouvert(s)">
+          <div class="content" style="overflow-y:auto !important; overflow-y: auto !important;">
 
-                <tr>
-                  <td>jokers.mp4</td>
-                  <td>4Mo</td>
-                  <td>07-08-2022 08:49:15</td>
-                  <td>AES-256</td>
-                  <td>Déchiffrement</td>
-                  </tr>
-                <tr>
-                
-                  <tr>
-                    <td>biblical.txt</td>
-                    <td>289ko</td>
-                    <td>07-08-2022 08:56:12</td>
-                    <td>AES-128</td>
-                    <td>Chiffrement</td>
-                    </tr>
-                  <tr>
-                    <tr>
-                      <td>use_to_be.mp3</td>
-                      <td>8Mo</td>
-                      <td>07-08-2022 9:56:12</td>
-                      <td>AES-128</td>
-                      <td>Chiffrement</td>
-                      </tr>
-                    <tr>
-            </table> -->
           </div>
         </div>
       </div>
@@ -317,11 +267,11 @@
             <div>
               <label for="veille-time">Régler le temps de veille :</label><br><br>
               <select id="veille">
-                <option value="10s">10s</option>
-                <option value="15s">15s</option>
-                <option value="30s">30s</option>
-                <option value="1min">1min</option>
-                <option value="2min">2min</option>
+                <option value="10000">10s</option>
+                <option value="15000">15s</option>
+                <option value="30000">30s</option>
+                <option value="60000">1min</option>
+                <option value="120000" selected>2min</option>
               </select>
               <br>
               <br>
@@ -363,7 +313,36 @@
       </div>
     </div>
 
+    <!-- En savoir plus modal -->
+    <div id="en_savoir_plus-modal" class="center">
+      <div class="center-child">
+        <div class="content">
+          <img src="2.jpg">
+          <h1>EzCrypt ...</h1>
+          <p>est une application bureau utilisée pour le chiffrement et le déchiffrement des fichiers multimédias.</p>
+          <h3>Avec EzCrypt : </h3>
+          <ul>
+            <li>bénéfiez de l'utilisation d'un algorithme avancée de chiffrement</li>
+            <li>visualisez directement le contenu de votre fichier chiffré sans d'abord les déchiffrer</li>
+            <li>assurez la sécurité de vos fichiers</li>
+          </ul>
+        </div>
+      </div>
+    </div>
     <!-- home modal -->
+    
+    <!-- <div  class="center" >
+      <div class="center-child">
+        <div class="content">
+          <h1>Vous êtes connecté !</h1>
+
+          <h3>Choisissez une opération sur la barre à gauche</h3>
+        </div>
+      </div>
+    </div>
+     -->
+    
+<!--     
     <div id="home-modal">
       <div>
         <div>
@@ -373,7 +352,7 @@
           <a href="#">Se déconnecter</a>
         </div>
       </div>
-    </div>
+    </div> -->
    
 
 

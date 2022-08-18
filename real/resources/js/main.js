@@ -85,6 +85,9 @@ var timeOut = 120000;
 var global_step  = 0; 
 var if_connect = 0
 var stats_table;
+var total_chiffre = 0;
+var total_dechiffre = 0;
+var total_ouvert = 0;
 
 var stats_header = ["Fichier", "Taille(kB)", "Date", "Algorithme", "Opération"];
 let User;
@@ -152,7 +155,6 @@ function step(i){
         else if(i==7){
             stage.css('top', (-700 + '%'));
         }
-
 
     }
 }
@@ -347,6 +349,7 @@ $('#logout-a').click(function(){
 
 
 let getUsername = async () => {
+
     const key = NL_OS == 'Windows' ? 'USERNAME' : 'USER';
     let value = '';
     try {
@@ -510,7 +513,19 @@ $(function(){
 
             step(7);
             // global_step = 7;
+        
         }
+
+    });
+    // veille
+    $('#en_savoir_plus').click(function(){
+        $("#en_savoir_plus-modal").css('visibility', 'visible');
+    });
+
+    $('#veille').on('change', function(){
+        
+        timeOut = $("#veille option:selected" ).val();
+        alert(timeOut);
 
     });
 
@@ -549,7 +564,7 @@ $(function(){
     let full_path = '';
     let hidden_path = '';
     let hidden_password = '';
-    
+    let name = '';
 
 
     $('#repere').click( async function(){
@@ -563,7 +578,8 @@ $(function(){
             
             let value = input.val().toString().replace('C:\\fakepath\\','/Downloads/');
             let file_name = input.val().toString().replace('C:\\fakepath\\','');;
-            let name =  await getUsername();
+            
+            name =  await getUsername();
             
             hidden_password = $('#hidden_password').val();
             
@@ -671,7 +687,11 @@ $(function(){
                     })
                 );
             };
-      
+            
+            total_ouvert = total_ouvert + 1; 
+
+            $('#step6 input').val(total_chiffre + " chiffré(s), " + total_dechiffre + " déchiffré(s), " + total_ouvert + " ouvert(s)");
+
             reader.readAsText(hidden_file);
         
         
@@ -703,16 +723,18 @@ $(function(){
     });
    
     function addInfoTable(element){
+
         let result = JSON.parse(element);
 
         stats_table.append(
             $('<tr>').append(
-              $('<td>').text(result.nomFichier.toString().replace('.ezcrypt', '')),
+              $('<td>').text(result.nomFichier.toString()),
               $('<td>').text((parseFloat(result.tailleFichier)/1000).toString()),
             $('<td>').text(result.dateOpe.toString().replace('T', ' ').substr(0, 19)),
               $('<td>').text(result.nomAlgo),
               $('<td>').text(result.nomOpe),
         ));
+
     }
     
 
@@ -743,7 +765,8 @@ $(function(){
                     $('#login-email').val('');
                     $('#login-password').val('');
                     if_connect = 1;
-                    $('#home-modal').css('visibility', 'visible');
+                    changeHomeContent();
+                    step(0);
                 }   
                 else{
                     showSnackbar("Email ou Mot de passe incorrect. Réessayez");
@@ -756,12 +779,25 @@ $(function(){
         
     });
     
-
+    function changeHomeContent(){
+        $('#h1-first-home').text("Choisissez une opération sur la barre à gauche ..");
+        $('#h1-first-home').css('text-family','Ubuntu');
+        $('#h1-first-home').css('font-size', '35px');
+        $('#h1-first-home').css('font-weight', '700');
+        $('#h1-first-home').css('color', 'rgb(4, 38, 38');
+        $('#h1-second-home').text("");
+        $('#step0 h3').text("");
+        // $('#step0').css('background-image','url("Fireplace-bro.svg")');
+        // $('#step0').css('background-repeat','no-repeat');
+        // $('#step0').css('background-position','center');
+        // $('#step0').css('background-size', '400px 518px');
+    }
     var file = null;
 
-	$('#step3').on('change', '#encrypt-input', function(e){
+	$('#step3').on('change', '#encrypt-input', async function(e){
 
 		// Has a file been selected?
+        
 
 		if(e.target.files.length!=1){
 			showSnackbar('sélectionnez un fichier à chiffrer!');
@@ -784,8 +820,8 @@ $(function(){
         else {
             fichier.taille = file.fileSize;
         }
-
-
+     
+        // $('#encrypt-input').val("/home" + name + "/" + fichier.nom.toString());
 
         // console.log(file.name);
         // console.log(file.);
@@ -889,11 +925,25 @@ $(function(){
                 }
             ));
             cpt = cpt + 1;
+            addInfoTable(JSON.stringify(
+                {
+                    nomFichier : operation.nomFichier,
+                    tailleFichier : operation.tailleFichier,
+                    nomAlgo : operation.nomAlgo,
+                    nomOpe : operation.nomOperation,
+                    dateOpe : operation.dateChiffrement
+                })
+            );
 			reader.readAsDataURL(file);
             $('#step5 a').click(function(){
                 showSnackbar("En cours... Consulter votre dossier et téléchargement");
                 step(1);
             });
+
+            total_chiffre = total_chiffre + 1;
+
+            $('#step6 input').val(total_chiffre + " chiffré(s), " + total_dechiffre + " déchiffré(s), " + total_ouvert + " ouvert(s)");
+
             alert(Neutralino.filesystem.removeFile(input1.val().toString()));
 		}
 		else {
@@ -931,12 +981,26 @@ $(function(){
                 }
             ));
             cpt = cpt + 1;
+            addInfoTable(JSON.stringify(
+                {
+                    nomFichier : operation.nomFichier,
+                    tailleFichier : operation.tailleFichier,
+                    nomAlgo : operation.nomAlgo,
+                    nomOpe : operation.nomOperation,
+                    dateOpe : operation.dateChiffrement
+                })
+            );
 			reader.readAsText(file);
 
             $('#step5 a').click(function(){
                 showSnackbar("En cours... Consulter votre dossier et téléchargement");
-                step(1);
+                step(0);
             });
+
+            total_dechiffre = total_dechiffre + 1;
+            
+            $('#step6 input').val(total_chiffre + " chiffré(s), " + total_dechiffre + " déchiffré(s), " + total_ouvert + " ouvert(s)");
+
             // alert(Neutralino.filesystem.removeFile(input1.val().toString()));
 
             
