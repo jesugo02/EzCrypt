@@ -80,7 +80,9 @@ var body  = $('body'),
 var emailUser;
 
 var fileCmp = 0;      
-var timeOut = 120000;     
+var timeOut = 120000;   
+var global_step  = 0; 
+var if_connect = 0
 
 let User;
 let UserListe = [];
@@ -88,6 +90,10 @@ let FileListe = [];
 
 $('#decryption-path').val('zerta');
 
+if(if_connect == 0){
+    $('#right-arrows').fadeOut();
+    $('#left-arrows').fadeOut();
+}
 function step(i){
 
     if(i === 0){
@@ -97,6 +103,7 @@ function step(i){
         $('#signup-sidebar').fadeIn(2000);
         stage.css('top', 0+'%');
         
+        
     }
     else{
 
@@ -105,14 +112,15 @@ function step(i){
         $('#signup-sidebar').fadeOut(1000);
         if(i==1){
             stage.css('top',(-100 + '%'));
+            
         }
         else if(i==2){
             stage.css('top', (-200 + '%'));
+           
         }
         else if(i==3){
             stage.css('top', (-300 + '%'));
         }
-        
         else if(i==4){
             stage.css('top', (-400 + '%'));
         }
@@ -130,6 +138,7 @@ function step(i){
     }
 }
 
+
 function next_step(){
     step(global_step+1);
     global_step=global_step+1;
@@ -141,11 +150,27 @@ function validateForm(){
     emailUser = document.forms["signup"]["email"].value;
     let  psw1 = document.forms["signup"]["psw"].value;
     let  psw2 = document.forms["signup"]["psw-repeat"].value;
-
+    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
     
     if (emailUser != "" && psw1 != "" && psw2 != "") {
         if(psw1 === psw2){
             if(psw1.length >= 5 && psw2.length >= 5){
+                
+                if(! emailUser.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
+                    // alert(emailUser);
+                    showSnackbar("Email invalide. Réessayez ...");
+                    $('#login-email').focus();
+                    return false;
+                }
+                if(!emailUser.includes("gmail.com")){
+                    showSnackbar("Utilisez un compte Gmail existant..");
+                    return false;
+                }
+                if(format.test(psw1)){
+                    showSnackbar("N'utlisez pas des caractès spéciaux!");
+                    return false;
+                }
+                
                 let User = new Utilisateur(emailUser, psw1);
                 User.email = User.email.replace('@','');
                 User.email = User.email.replace('.','');
@@ -153,6 +178,11 @@ function validateForm(){
                 localStorage.setItem(User.email, psw1);
                 alert(localStorage.getItem(User.email));
                 showSnackbar("Inscription effectuée avec succès");                
+                
+                document.forms["signup"]["email"].value = "";
+                document.forms["signup"]["psw"].value = "";
+                document.forms["signup"]["psw-repeat"].value = "";
+
                 step(1);
     
             }
@@ -361,24 +391,51 @@ $(function(){
     });
 
     $('#chiffrer').click(function(){
-        body.attr('class', 'encrypt');
+        if(if_connect == 0){
+            showSnackbar("Veillez vous connecter d'abord ...");
+            $('#home').click();
+            return false;
+        }
+        else{
+            body.attr('class', 'encrypt');
 
-		step(3);
-        global_step = 3;
+            step(3);
+            // global_step = 3;
+        }
+       
     });
 
     $('#dechiffrer').click(function(){
-        body.attr('class', 'decrypt');
+        
+        if(if_connect == 0){
+            showSnackbar("Veillez vous connecter d'abord ...");
+            $('#home').click();
+            return false;
+        }
+        else{
+            body.attr('class', 'decrypt');
 
-		step(3);
-        global_step = 3;
+            step(3);
+            //global_step = 3;
+        }
+
     });
 
     $('#aide').click(function(){
-        body.attr('class', 'help');
+        
+        if(if_connect == 0){
+            showSnackbar("Veillez vous connecter d'abord ...");
+            $('#home').click();
+            return false;
+        }
+        else{
+            body.attr('class', 'help');
 
-		step(3);
-        global_step = 3;
+            step(3);
+            // global_step = 3;
+        }
+
+       
     });
 
     // $('#loged-in').click(function(){
@@ -388,24 +445,52 @@ $(function(){
     // });
 
     $('#ouvrir').click(function(){
-        body.attr('class', 'open');
+        if(if_connect == 0){
+            showSnackbar("Veillez vous connecter d'abord ...");
+            $('#home').click();
+            return false;
+        }
+        else{
+            body.attr('class', 'open');
 
-		step(3);
-        global_step = 3;
+            step(3);
+            // global_step = 3;
+        }
+      
+        
+        
     });
     
     $('#dashboard').click(function(){
-        body.attr('class', 'dashboard');
+        if(if_connect == 0){
+            showSnackbar("Veillez vous connecter d'abord ...");
+            $('#home').click();
+            return false;
+        }
+        else{
+            body.attr('class', 'dashboard');
 
-		step(6);
-        global_step = 6;
+            step(6);
+            // global_step = 6;
+        }
+        
+        
     });
 
     $('#parametre').click(function(){
-        body.attr('class', 'parametre');
+        
+        if(if_connect == 0){
+            showSnackbar("Veillez vous connecter d'abord ...");
+            $('#home').click();
+            return false;
+        }
+        else{
+            body.attr('class', 'parametre');
 
-		step(7);
-        global_step = 7;
+            step(7);
+            // global_step = 7;
+        }
+
     });
 
     $('#step3 .button').click(function(){
@@ -441,43 +526,9 @@ $(function(){
 
     let command = '';
     let full_path = '';
+    let hidden_path = '';
     let hidden_password = '';
     
-
-    // $('#step3').on('change', '#first-input', function(e){
-
-    //     if(e.target.files.length!=1){
-    //         showSnackbar('Choisissez un fichier à déchiffrer!');
-    //         return false;
-    //     }
-
-    //     let hidden_file = e.target.files[0];
-    //     // step(4);
-    //     // global_step = 4;
-
-    //     var reader = new FileReader();
-    //     let a = $('#hidden-a');
-
-    //     reader.onload = function(e){
-            
-    //         var decrypted = CryptoJS.AES.decrypt(e.target.result, password)
-    //                                 .toString(CryptoJS.enc.Latin1);
-
-    //         if(!/^data:/.test(decrypted)){
-    //             showSnackbar("Mot de passe incorrect. Réessayez... ");
-    //             return false;
-    //         }
-
-    //         a.attr('href', decrypted);
-    //         a.attr('download', file.name.replace('.ezcrypt',''));
-
-
-    //         step(5);
-    //         global_step = 5;
-    //     };
-
-    //     reader.readAsText(hidden_file);
-    // });
 
 
     $('#repere').click( async function(){
@@ -499,7 +550,7 @@ $(function(){
             
             $('#send-path').val(full_path);
             
-            let hidden_path = '/home/'+ name + '/Downloads' + '/.ez';
+            hidden_path = '/home/'+ name + '/Downloads' + '/.ez';
             
             Neutralino.filesystem.createDirectory(hidden_path);
             
@@ -513,7 +564,7 @@ $(function(){
 
             //////////////////////////////
 
-            alert("just before");
+            // alert("just before");
 
             if(e.target.files.length!=1){
                 
@@ -523,7 +574,7 @@ $(function(){
             
             }
 
-            alert("just after");
+            // alert("just after");
 
             let hidden_file = e.target.files[0];            
             // alert(hidden_file);
@@ -535,17 +586,21 @@ $(function(){
                 
 
                 var element = document.createElement('a');
-                alert("entered onloading....");
+                // alert("entered onloading....");
 
                 
                 var decrypted = CryptoJS.AES.decrypt(e.target.result, hidden_password).toString(CryptoJS.enc.Latin1);
                 
                 
-                alert("just after onloading...");
+                // alert("just after onloading...");
                 
                 if(!/^data:/.test(decrypted)){
 
                     showSnackbar("Mot de passe incorrect. Réessayez..");
+                    full_path = '';
+                    hidden_path = '';
+                    $('#hidden_password').val('');
+                    $('#send-path').val('');
                     return false;
                 
                 }
@@ -558,10 +613,7 @@ $(function(){
                 a_fix.appendChild(element);
                 element.click();
 
-                a_fix.removeChild(element);
-                
-                await Neutralino.filesystem.moveFile(full_path.replace('.ezcrypt', '') , hidden_path);
-
+                a_fix.removeChild(element);   
 
             };
       
@@ -571,37 +623,70 @@ $(function(){
         });
            
         //////////////////////////////
-        
-
     });
 
-    $('a.browse.red').click(function(){
 
+    $('a.browse.red').click(function(){
+        
+        if(command == ''){
+            showSnackbar("Veillez choisir un fichier ...");
+            return false;
+        }
+        if($('#hidden_password').val() == ''){
+            showSnackbar("Veillez entrer la clé de chiffrement...");
+            return false;
+        }
+        
+        Neutralino.filesystem.moveFile(full_path.replace('.ezcrypt', '') , hidden_path);
         Neutralino.os.execCommand(command, {background : true});
-        // $('#input-path').val('');
+        
+        step(1);
+        $('#home').click();
+        $('#hidden_password').val('');
+        
 
     });
    
     
 
     $('#seconnecter').click(function(){
-        let  emailUser = document.getElementById('login-email').value;
-        let  psw = document.getElementById('login-password').value;
-        
-        matching_password = localStorage.getItem(emailUser.replace('@','').replace('.',''));
-        alert(matching_password);
-        if(matching_password != null){
-        
-            if(psw === matching_password){
-                showSnackbar('Vous êtes connectés');
-                $('#login-email').val('');
-                $('#login-password').val('');
-            }   
-            else{
-                showSnackbar("Email ou Mot de passe incorrect. Réessayez");
+        let  emailUser = $('#login-email').val();
+        // alert(emailUser);
+        let  psw = $('#login-password').val();
+        // alert(psw);
+        if(emailUser == "" || psw == "") {
+            showSnackbar("Veillez renseigner tous les champs");
+        }else{
+            // alert(emailUser);
+            if(! emailUser.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
+                // alert(emailUser);
+                showSnackbar("Email invalide. Réessayez ...");
+                $('#login-email').focus();
+                return false;
             }
+            if(!emailUser.includes("gmail.com")){
+                showSnackbar("Utilisez un compte Gmail existant..");
+                return false;
+            }
+            let matching_password = localStorage.getItem(emailUser.replace('@','').replace('.',''));
+            if(matching_password != null){
+            
+                if(psw === matching_password){
+                    showSnackbar('Vous êtes connectés');
+                    $('#login-email').val('');
+                    $('#login-password').val('');
+                    if_connect = 1;
+                    $('#home-modal').css('visibility', 'visible');
+                }   
+                else{
+                    showSnackbar("Email ou Mot de passe incorrect. Réessayez");
+                }
 
+            }else{
+                showSnackbar("Compte inexistant ...");
+            }
         }
+        
 
     });
     
@@ -765,12 +850,6 @@ $(function(){
 
 
 
-    // $('#dashboard').click(function(){
-    //     body.attr('class', 'encrypt');
-
-	// 	step(3);
-    // });
-
     next.click(function(){
         next_step();
     });
@@ -794,11 +873,10 @@ function  showSnackbar(message) {
 } 
 
 
-
 // END OF MY FUNCITONS
 
 
-Neutralino.events.on("trayMenuItemClicked", onTrayMenuItemClicked);
+// Neutralino.events.on("trayMenuItemClicked", onTrayMenuItemClicked);
 Neutralino.events.on("windowClose", onWindowClose);
 
 if(NL_OS != "Darwin") { // TODO: Fix https://github.com/neutralinojs/neutralinojs/issues/615

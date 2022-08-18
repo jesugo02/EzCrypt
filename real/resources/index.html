@@ -87,7 +87,7 @@
   
               <div class = "login-part">
                   <label class = "login-label" for="password" >Mot de passe</label><br>
-                  <input class = "login-input" type="password" placeholder="*****" id="login-password" ><span class="eye-span"><img class="eye" onclick = "hidepsd()" src="./icons/sidebar/eye-solid.svg" alt=""></span><br>
+                  <input class = "login-input" type="password" placeholder="*****" id="login-password" >
               </div>
               
               <div class = "login-part" id = "login-part">
@@ -179,10 +179,10 @@
             <div class="flex">
               <a class="browse" id="repere">Choisir</a>
               <input type="file" id="first-input">
-              <input class="input-path" type="text" id = "hidden_password">
-              <input class="input-path" type="text" id="send-path" placeholder="Entrez le chemin entier du fichier...">
+              <input class="input-path" type="password" id = "hidden_password" placeholder="password">
+              <input class="input-path" type="text" id="send-path" placeholder="Entrez le chemin entier du fichier..." style="display: none;">
               <a class="browse red">Ouvrir</a>
-              <a id="hidden-a"></a>
+              <!-- <a id="hidden-a"></a> -->
               
             </div>
             
@@ -316,11 +316,11 @@
             <div>
               <label for="veille-time">Régler le temps de veille :</label><br><br>
               <select id="veille">
+                <option value="10s">10s</option>
                 <option value="15s">15s</option>
                 <option value="30s">30s</option>
                 <option value="1min">1min</option>
                 <option value="2min">2min</option>
-                <option value="5min">5min</option>
               </select>
               <br>
               <br>
@@ -342,50 +342,47 @@
 
      
     </div>
+
      <!-- Logout Modal -->
     <div id="logout-modal" class="center" >
       <div class="center-child">
         <div class="content">
           <h1>@EzCrypt</h1>
 
-          <div id = "hour">
+          <div id = "hour"></div>
+          <div id="date"></div>
 
-          </div>
-          <div id="date">
-
-          </div>
           <p  id="info">Double-cliquez pour vous connecter</p>
           <div id="logout-password" style = "left: 15px;">
             <input id="hidden" style="margin-bottom: 50px; display: none;">
             <input  id="logout-input" type="password" placeholder="**********">
-            <!-- <input type="checkbox" name="" id="logout-checkbox"  onclick="hidepsd()"><br> -->
             <a class = "logout-button" href="#" id = 'logout-a'>Se connecter</a>
           </div>
+        </div>
       </div>
     </div>
 
-    </div>
+    <!-- home modal -->
+    <div id="home-modal">
+      <div>
+        <div>
+          <h1>Vous êtes connecté</h1>
+          <h3>Choisissez une opération ...</h3>
 
-    
+          <a href="#">Se déconnecter</a>
+        </div>
+      </div>
+    </div>
+   
+
+
+
+        
 
 
     <script>
 
-      function hidepsd(){
-       
-          var input = $("#logout-input");
-
-          if (input.attr("type") == "password") {
-              input.attr("type", "text");
-          }else {
-              input1.attr("type", "password");
-          }
-      }
-
-      function dataStore(){
-
-      }
-
+   
       
       
     </script>
