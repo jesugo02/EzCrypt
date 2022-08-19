@@ -382,7 +382,11 @@ $(function(){
         next  = $('#right-arrows');
 
     $('#commencer').click(function(){
-        step(1);
+        if(if_connect == 0){
+            step(1);
+        }else{
+            $('#chiffrer').click();
+        }
         global_step = 1;
     });
 
@@ -521,12 +525,30 @@ $(function(){
     $('#en_savoir_plus').click(function(){
         $("#en_savoir_plus-modal").css('visibility', 'visible');
     });
+    $('#guide').click(function(){
+        $('#guide-modal').css('visibility', 'visible');
+    });
+    $('#faq').click(function(){
+        $('#faq-modal').css('visibility', 'visible');
+    });
 
     $('#veille').on('change', function(){
         
         timeOut = $("#veille option:selected" ).val();
         alert(timeOut);
 
+    });
+
+    $('#sombre').click(function(){
+        $('body').css('background-color', 'black');
+        $('#mySidenav').css('background-color', 'black');
+        $('#mySidenav').css('color', 'white');
+    });
+
+    $('#clair').click(function(){
+        $('body').css('background-color', 'white');
+        $('#mySidenav').css('background-color', '#edece8');
+        $('#mySidenav').css('color', 'black');
     });
 
     $('#step3 .button').click(function(){

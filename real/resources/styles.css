@@ -373,6 +373,191 @@ table {
     color: rgb(4, 38, 38);
 }
 
+
+
+/* en savoir plus */
+#en_savoir_plus-modal{
+    visibility: hidden;
+    /* height: 100vh; */
+    background-color: #fefefe;
+    left: 179px;
+    top: 41px;
+    right: 0;
+    height: 100vh;
+    position: fixed;
+    z-index: 5;
+    padding-left: 0px !important;
+    font-family: Ubuntu;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+#en_savoir_plus-modal h1{
+    font-size: 45px;
+    color: #034241;
+    margin-bottom:10px;
+margin-left: -20px;
+}
+
+.center-child-en_savoir_plus{
+    border: 1px solid rgb(200, 199, 199);
+    padding: 90px;
+    padding-left: 40px;
+    border-radius: 15px;
+    background-color: #ffffff;
+    box-shadow: 5px 10px 18px #888888;
+    display: flex;
+    background-image: url("Typing-bro.svg");
+    background-position: right bottom;
+    background-repeat: no-repeat;
+    background-size: 500px 500px;
+}
+#en_savoir_plus-modal h3{
+    font-size: 25px;
+    color: #0db6a2;
+    margin-bottom: 30px;
+}
+.center-en_savoir_plus{
+    padding: 200px;
+    padding-left: 600px;
+    margin-left: 40px;
+    
+}
+
+#en_savoir_plus-modal li{
+    margin-top: 10px;
+    font-weight: bold;
+}
+.close {
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #363333;
+}
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Guide d''utilisation */
+#guide-modal{
+    visibility: hidden;
+    /* height: 100vh; */
+    background-color: #fefefe;
+    left: 179px;
+    top: 41px;
+    right: 0;
+    height: 100vh;
+    position: fixed;
+    z-index: 5;
+    padding-left: 0px !important;
+    font-family: Ubuntu;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+#guide-modal h1{
+    font-size: 45px;
+    color: #034241;
+    margin-bottom:10px;
+margin-left: -20px;
+}
+
+.center-child-guide{
+    border: 1px solid rgb(200, 199, 199);
+    padding: 90px;
+    padding-left: 40px;
+    border-radius: 15px;
+    background-color: #ffffff;
+    box-shadow: 5px 10px 18px #888888;
+    display: flex;
+    background-image: url("Helpful sign-bro.svg");
+    background-position: right bottom;
+    background-repeat: no-repeat;
+    background-size: 500px 500px;
+}
+#guide-modal h3{
+    font-size: 25px;
+    color: #0db6a2;
+    margin-bottom: 30px;
+}
+.center-guide{
+    padding: 200px;
+    padding-left: 600px;
+    margin-left: 40px;
+    
+}
+
+#guide-modal li{
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+/* Faq */
+#faq-modal{
+    visibility: hidden;
+    /* height: 100vh; */
+    background-color: #fefefe;
+    left: 179px;
+    top: 41px;
+    right: 0;
+    height: 100vh;
+    position: fixed;
+    z-index: 5;
+    padding-left: 0px !important;
+    font-family: Ubuntu;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+#faq-modal h1{
+    font-size: 45px;
+    color: #034241;
+    margin-bottom:10px;
+margin-left: -20px;
+}
+
+
+
+.center-child-faq{
+    border: 1px solid rgb(200, 199, 199);
+    padding: 90px;
+    padding-left: 40px;
+    border-radius: 15px;
+    background-color: #ffffff;
+    box-shadow: 5px 10px 18px #888888;
+    display: flex;
+    background-image: url("Writing a letter-bro.svg");
+    background-position: right bottom;
+    background-repeat: no-repeat;
+    background-size: 500px 500px;
+}
+#faq-modal h3{
+    font-size: 25px;
+    color: #0db6a2;
+    margin-bottom: 30px;
+}
+.center-faq{
+    padding: 200px;
+    padding-left: 600px;
+    margin-left: 40px;
+    
+}
+
+#faq-modal li{
+    margin-top: 30px;
+    font-weight: bold;
+}
+
 /* Logout Modal */
 
 #logout-modal{

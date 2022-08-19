@@ -17,7 +17,7 @@
         <div class="dark-mode-content" id = "dark-mode-content">
           <a href="#" id="blank_a"></a>
           <a href="#" id="sombre" onclick="darkMode()">Sombre</a>
-          <a href="#" onclick="lightMode()">Clair</a>
+          <a href="#" id ="clair" onclick="lightMode()">Clair</a>
         </div>
       </div>
       <a href="#" id = "login-sidebar" onclick="step(1);">Login</a>
@@ -191,8 +191,8 @@
 
           <div class="content if-help" id = "help-box">
             <img src="./Problem solving-pana.svg" alt="">
-            <a class="browse button help-modal">Guide d'utlisation</a>
-            <a class="browse button help-modal">Session FAQ</a>
+            <a class="browse button help-modal" id="guide">Guide d'utlisation</a>
+            <a class="browse button help-modal" id="faq">Session FAQ</a>
           </div>
 
           <div class="content if-dashboard">
@@ -314,17 +314,56 @@
     </div>
 
     <!-- En savoir plus modal -->
-    <div id="en_savoir_plus-modal" class="center">
-      <div class="center-child">
+    <div id="en_savoir_plus-modal" class="center-en_savoir_plus">
+      <div class="center-child-en_savoir_plus">
+        <span onclick="document.getElementById('en_savoir_plus-modal').style.visibility='hidden'" class="close" title="Close Modal">&times;</span>
         <div class="content">
-          <img src="2.jpg">
-          <h1>EzCrypt ...</h1>
-          <p>est une application bureau utilisée pour le chiffrement et le déchiffrement des fichiers multimédias.</p>
-          <h3>Avec EzCrypt : </h3>
+          <!-- <img src="2.jpg"> -->
+          <h1>Utilisez EzCrypt </h1>
+          <h3>pour le chiffrement et le déchiffrement de vos fichiers multimédias.</h3>
           <ul>
             <li>bénéfiez de l'utilisation d'un algorithme avancée de chiffrement</li>
             <li>visualisez directement le contenu de votre fichier chiffré sans d'abord les déchiffrer</li>
             <li>assurez la sécurité de vos fichiers</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Guide d'utilisation -->
+    <div id="guide-modal" class="center-guide">
+      <div class="center-child-guide">
+        <span onclick="document.getElementById('guide-modal').style.visibility='hidden'" class="close" title="Close Modal">&times;</span>
+        <div class="content">
+          <!-- <img src="2.jpg"> -->
+          <h1>Vous êtes nouveau ?</h1>
+          <ul>
+            <li>Inscrivez-vous (en cliquant sur le bouton signup)</li>
+            <li>Connectez-vous (avec votre compte utilisateur)</li>
+            <li>Chiffrer, Déchiffrer et Ouvrir vos fichier (la barre à gauche)</li>
+            <li>Consulter l'historique via le Dashboard</li>
+            <li>Utiliser le paramètre pour fixer vos préférences</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="faq-modal" class="center-faq">
+      <div class="center-child-faq">
+        <span onclick="document.getElementById('faq-modal').style.visibility='hidden'" class="close" title="Close Modal">&times;</span>
+        <div class="content">
+          <!-- <img src="2.jpg"> -->
+          <ul>
+            <li><h1>Comment s'inscrire ?</h1></li>
+            <ul>
+              <li>Àprès avoir cliqué sur 'signup' vous remplissez le formulaire et vous le soumettez en cliquant sur le bouton 's'inscrire'</li>
+            </ul>
+
+            <li><h1>Comment déchiffrer un fichier?</h1></li>
+            <ul>
+              <li>Vous cliquez sur le bouton 'déchiffrer' et ensuite vous renseignez la clé de chiffrement utilisée lors du chiffrement</li>
+            </ul>
+            
           </ul>
         </div>
       </div>
