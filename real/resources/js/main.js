@@ -295,7 +295,7 @@ let identifier = 1;
 $('#logout-modal').dblclick(function(){
     
     if(identifier == 1){
-        $(this).css("background-image", "url('./Secure\ data-pana.svg')");
+        $(this).css("background-image", "url('./images/Secure\ data-pana.svg')");
         $('#logout-modal h1').fadeOut();
         $('#hour').fadeOut();
         $('#date').fadeOut();

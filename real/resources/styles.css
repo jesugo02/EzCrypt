@@ -409,7 +409,7 @@ margin-left: -20px;
     background-color: #ffffff;
     box-shadow: 5px 10px 18px #888888;
     display: flex;
-    background-image: url("Typing-bro.svg");
+    background-image: url("./images/Typing-bro.svg");
     background-position: right bottom;
     background-repeat: no-repeat;
     background-size: 500px 500px;
@@ -478,7 +478,7 @@ margin-left: -20px;
     background-color: #ffffff;
     box-shadow: 5px 10px 18px #888888;
     display: flex;
-    background-image: url("Helpful sign-bro.svg");
+    background-image: url("./images/Helpful\ sign-bro.svg");
     background-position: right bottom;
     background-repeat: no-repeat;
     background-size: 500px 500px;
@@ -536,7 +536,7 @@ margin-left: -20px;
     background-color: #ffffff;
     box-shadow: 5px 10px 18px #888888;
     display: flex;
-    background-image: url("Writing a letter-bro.svg");
+    background-image: url("./images/Writing\ a\ letter-bro.svg");
     background-position: right bottom;
     background-repeat: no-repeat;
     background-size: 500px 500px;
@@ -708,7 +708,7 @@ margin-left: -20px;
 
 
 #step0{
-    background-image: url("./blog-post-animate.svg");
+    background-image: url("./images/blog-post-animate.svg");
     background-repeat: no-repeat;
     background-position: right top;
     background-size: 400px 518px;
@@ -717,7 +717,7 @@ margin-left: -20px;
 }
 
 #step1{
-    background-image: url("./fingerprint-animate.svg");
+    background-image: url("./images/fingerprint-animate.svg");
     background-repeat: no-repeat;
     background-position: right bottom;
     background-size: 400px 400px;
@@ -810,7 +810,7 @@ body.parametre .parametre{
     top: 100px;
     padding-left: 0px !important;
     background-color: white;
-    background-image: url(./secure-data-animate.svg);
+    background-image: url(./images/secure-data-animate.svg);
     background-repeat: no-repeat;
     background-size: auto 500px;
     background-position: right top;
@@ -1182,7 +1182,7 @@ hr{
     margin-bottom: 90px;
     bottom: 50px;
     background-color: #c2fdfc;
-    background-image: url(./Social\ media-rafiki.svg);
+    background-image: url(./images/Social\ media-rafiki.svg);
     background-repeat: no-repeat;
     background-position: right top;
     /* background-size: 400px 518px; */
