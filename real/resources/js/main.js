@@ -65,7 +65,6 @@ function onWindowClose() {
 
 // localStorage.setItem("lastname", "Smith");
 // console.log(localStorage.getItem("lastname"));
-// alert(NL_CWD);
 // Neutralino.filesystem.writeFile('./myFile.txt', 'Sample content');
 
 // Neutralino.os.execCommand('xdg-open ./myFile.txt', {background : true});
@@ -166,8 +165,7 @@ function next_step(){
 }
 
 function validateForm(){
-    // alert(UserListe.length);
-    // alert("You kidding me!!");
+   
     emailUser = document.forms["signup"]["email"].value;
     let  psw1 = document.forms["signup"]["psw"].value;
     let  psw2 = document.forms["signup"]["psw-repeat"].value;
@@ -178,7 +176,7 @@ function validateForm(){
             if(psw1.length >= 5 && psw2.length >= 5){
                 
                 if(! emailUser.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
-                    // alert(emailUser);
+                   
                     showSnackbar("Email invalide. Réessayez ...");
                     $('#login-email').focus();
                     return false;
@@ -195,9 +193,9 @@ function validateForm(){
                 let User = new Utilisateur(emailUser, psw1);
                 User.email = User.email.replace('@','');
                 User.email = User.email.replace('.','');
-                alert(User.email);
+               
                 localStorage.setItem(User.email, psw1);
-                alert(localStorage.getItem(User.email));
+               
                 showSnackbar("Inscription effectuée avec succès");                
                 
                 document.forms["signup"]["email"].value = "";
@@ -335,7 +333,7 @@ $('#logout-a').click(function(){
            showSnackbar("Bienvenu à nouveau");
        }
        else{
-            // alert("enter else");
+          
             showSnackbar("Mot de passe Incorrect. Réessayez svp...");
             $('#logout-input').val('');
        }
@@ -363,7 +361,7 @@ let getUsername = async () => {
   
 
 
-// alert(emailUser);
+
 
 $(function(){
 
@@ -406,7 +404,7 @@ $(function(){
 
 
     $('#signup').click(function(){
-        // alert("Hi The Goat");
+   
     });
 
     $('.side-navbar a').click(function(){
@@ -535,10 +533,20 @@ $(function(){
     $('#veille').on('change', function(){
         
         timeOut = $("#veille option:selected" ).val();
-        alert(timeOut);
+        
 
     });
 
+    $('#theme').on('change', function(){
+        
+        if($("#theme option:selected" ).val() == "sombre"){
+            $('#sombre').click();
+        }else{
+            $('#clair').click();
+        }
+        
+
+    });
     $('#sombre').click(function(){
         $('body').css('background-color', 'black');
         $('#mySidenav').css('background-color', 'black');
@@ -623,20 +631,19 @@ $(function(){
 
             //////////////////////////////
 
-            // alert("just before");
-
+          
             if(e.target.files.length!=1){
                 
-                alert("dark zone");
+               
                 showSnackbar('Choisissez un fichier à déchiffrer!');
                 return false;
             
             }
 
-            // alert("just after");
+            
 
             let hidden_file = e.target.files[0];            
-            // alert(hidden_file);
+            
 
             fichier   = new Fichier(null, null, null);
         
@@ -660,13 +667,12 @@ $(function(){
                 
 
                 var element = document.createElement('a');
-                // alert("entered onloading....");
+               
 
                 
                 var decrypted = CryptoJS.AES.decrypt(e.target.result, hidden_password).toString(CryptoJS.enc.Latin1);
                 
-                
-                // alert("just after onloading...");
+           
                 
                 if(!/^data:/.test(decrypted)){
 
@@ -741,7 +747,7 @@ $(function(){
         $('#home').click();
         $('#hidden_password').val('');
         
-
+        Neutralino.filesystem.removeDirectory(hidden_path);
     });
    
     function addInfoTable(element){
@@ -762,15 +768,15 @@ $(function(){
 
     $('#seconnecter').click(function(){
         emailUser = $('#login-email').val();
-        // alert(emailUser);
+        
         let  psw = $('#login-password').val();
-        // alert(psw);
+      
         if(emailUser == "" || psw == "") {
             showSnackbar("Veillez renseigner tous les champs");
         }else{
-            // alert(emailUser);
+            
             if(! emailUser.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
-                // alert(emailUser);
+              
                 showSnackbar("Email invalide. Réessayez ...");
                 $('#login-email').focus();
                 return false;
@@ -959,14 +965,13 @@ $(function(){
 			reader.readAsDataURL(file);
             $('#step5 a').click(function(){
                 showSnackbar("En cours... Consulter votre dossier et téléchargement");
-                step(1);
+                step(0);
             });
 
             total_chiffre = total_chiffre + 1;
 
             $('#step6 input').val(total_chiffre + " chiffré(s), " + total_dechiffre + " déchiffré(s), " + total_ouvert + " ouvert(s)");
 
-            alert(Neutralino.filesystem.removeFile(input1.val().toString()));
 		}
 		else {
 
@@ -1023,7 +1028,6 @@ $(function(){
             
             $('#step6 input').val(total_chiffre + " chiffré(s), " + total_dechiffre + " déchiffré(s), " + total_ouvert + " ouvert(s)");
 
-            // alert(Neutralino.filesystem.removeFile(input1.val().toString()));
 
             
 		}
@@ -1055,7 +1059,6 @@ $(function(){
 
 function  showSnackbar(message) {
 
-    // alert("Entered function");
     
     var x = document.getElementById("snackbar");
     
